@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+
+        android:id="@+id/txtTMQuestions"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#303030"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question 1 : What is Duong's friend name?"
+        android:background="@drawable/backgroud_testmedia"
+        />
+    <RadioGroup
+        android:layout_below="@+id/txtTMQuestions"
+        android:layout_marginTop="10dp"
+
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="40dp"
+        >
+
+        <RadioButton
+            android:id="@+id/rdAP2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="(A) Le Chanh Dai"
+            />
+
+        <RadioButton
+            android:id="@+id/rdBP2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="(B) Banh Thi Thuy Duy"
+             />
+
+        <RadioButton
+            android:id="@+id/rdCP2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="(C) Vo Thi Dai" />
+
+        <RadioButton
+            android:id="@+id/rdDP2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="(D) Le Thi Thuy Duy" />
+    </RadioGroup>
+
+</RelativeLayout>
