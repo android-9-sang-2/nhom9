@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:id="@+id/imgTHTrai"
+        android:layout_width="75dp"
+        android:layout_height="75dp" />
+    <TextView
+        android:textColor="#1b1b1b"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:id="@+id/txtTHTieude"
+        android:layout_toRightOf="@+id/imgTHTrai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Part 1 Test 01"/>
+    <TextView
+        android:textColor="#736e6e"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:id="@+id/txtTHdiem"
+        android:layout_toRightOf="@+id/imgTHTrai"
+        android:layout_below="@+id/txtTHTieude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="High Score: 5/10"
+        />
+
+</RelativeLayout>

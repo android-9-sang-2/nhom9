@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:weightSum="10"
+    >
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:background="#EF5350"
+       >
+        <ImageButton
+            android:id="@+id/imgbtMenu"
+            android:layout_marginLeft="10dp"
+            android:layout_width="45dip"
+            android:layout_height="match_parent"
+            android:src="@drawable/menu"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            />
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:id="@+id/txtTieuDe"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="TOEIC TEST"
+            android:textColor="#fafafa"
+            android:textSize="18dp"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="horizontal"
+        android:gravity="left"
+        >
+        <GridView
+            android:numColumns="2"
+            android:id="@+id/gvmenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <!--<ListView-->
+            <!--android:id="@+id/lvTH"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+
+            <!--&gt;</ListView>-->
+    </LinearLayout>
+
+
+</LinearLayout>

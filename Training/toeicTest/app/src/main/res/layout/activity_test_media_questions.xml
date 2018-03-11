@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#0288D1"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+
+        <ImageView
+            android:id="@+id/clock"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2.5"
+            app:srcCompat="@drawable/clock" />
+
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00:53"
+            android:textColor="#ffffff"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/txtP2Questions"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="1/10"
+            android:textColor="#ffffff"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnDoneP2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@null"
+            android:padding="30dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/done" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ListView
+            android:id="@+id/lvquestion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="#0288D1"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/txtBeginTimeP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/skListenP2"
+                android:layout_alignStart="@+id/skListenP2"
+                android:layout_alignTop="@+id/txtEndTimeP2"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:text="00:00"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/txtEndTimeP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/skListenP2"
+                android:layout_alignRight="@+id/skListenP2"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:text="00:00"
+                android:textSize="18dp" />
+
+            <SeekBar
+                android:id="@+id/skListenP2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btnNextP2"
+                android:layout_toStartOf="@+id/btnNextP2"
+                android:background="@null"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/play" />
+
+            <ImageButton
+                android:id="@+id/btnPrevP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btnPlay"
+                android:layout_toStartOf="@+id/btnPlay"
+                android:background="@null"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/previous" />
+
+            <ImageButton
+                android:id="@+id/btnNextP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_toLeftOf="@+id/btnSkipP2"
+                android:layout_toStartOf="@+id/btnSkipP2"
+                android:background="@null"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/next" />
+
+            <ImageButton
+                android:id="@+id/btnSkipP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/skip" />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
