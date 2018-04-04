@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ff0000"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageluachon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:padding="20dp"
+            android:src="@drawable/gachgach" />
+
+        <TextView
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="TOEIC TEST"
+            android:textSize="18dp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffb74d">
+
+        <GridView
+            android:id="@+id/customgrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/os_texts"
+            android:numColumns="2" />
+
+
+
+    </RelativeLayout>
+</LinearLayout>
