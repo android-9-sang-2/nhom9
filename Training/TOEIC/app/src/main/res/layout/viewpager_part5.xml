@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ln_cauHoiP5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtCHP5"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#303030"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question 1 :"
+                android:background="@drawable/background_cauhoi"
+                />
+            <RadioGroup
+                android:id="@+id/rgP5"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="40dp"
+                >
+
+                <RadioButton
+                    android:id="@+id/rdAP5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="(A) "
+                    />
+
+                <RadioButton
+                    android:id="@+id/rdBP5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="(B) "
+                    />
+
+                <RadioButton
+                    android:id="@+id/rdCP5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="(C) " />
+
+                <RadioButton
+                    android:id="@+id/rdDP5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="(D) " />
+            </RadioGroup>
+</LinearLayout>
