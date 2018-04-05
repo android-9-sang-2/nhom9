@@ -8,6 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="#24292d"
+        android:gravity="center"
+        android:textStyle="bold"
         android:text="1" />
 
     <TextView
@@ -15,5 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="#a100ff"
         android:text="TextView" />
 </LinearLayout>

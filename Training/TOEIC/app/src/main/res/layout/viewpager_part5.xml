@@ -58,4 +58,25 @@
                     android:layout_weight="1"
                     android:text="(D) " />
             </RadioGroup>
+            <TextView
+                android:id="@+id/txtTipsP5"
+                android:layout_width="wrap_content"
+                android:text="Khong co huong dan nao"
+                android:visibility="invisible"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/btnTipP5"
+                    android:layout_width="40dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/tips" />
+            </RelativeLayout>
+
 </LinearLayout>

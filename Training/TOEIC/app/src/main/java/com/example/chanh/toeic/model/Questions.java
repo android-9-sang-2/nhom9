@@ -16,8 +16,15 @@ public class Questions {
     String part;
     String img;
     String audio;
-    String traloi="";
+    String huongDan;
+    String traloi=null;
+    public String getHuongDan() {
+        return huongDan;
+    }
 
+    public void setHuongDan(String huongDan) {
+        this.huongDan = huongDan;
+    }
     public String getTraloi() {
         return traloi;
     }

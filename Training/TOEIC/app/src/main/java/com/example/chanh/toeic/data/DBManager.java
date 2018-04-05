@@ -101,30 +101,5 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     }
-//    public void openDatabase(){
-//        String dpPath=context.getDatabasePath(DATABASE_NAME).getPath();
-//        if(database != null && database.isOpen()){
-//            return;
-//        }
-//        database = SQLiteDatabase.openDatabase(dpPath,null,SQLiteDatabase.OPEN_READWRITE);
-//
-//    }
-//    public void closeDatabase(){
-//        if (database!=null) database.close();
-//    }
-//    public List<Part2CH> getListCauHoi(){
-//        Part2CH part2CH = null;
-//        List <Part2CH> part2CHList = new ArrayList<>();
-//        openDatabase();
-//        Cursor cursor = database.rawQuery("SELECT * FROM question",null);
-//        cursor.moveToFirst();
-//        while (!cursor.isAfterLast()){
-//            part2CH = new Part2CH(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getString(9),cursor.getString(10));
-//            part2CHList.add(part2CH);
-//            cursor.moveToNext();
-//        }
-//        cursor.close();
-//        closeDatabase();
-//        return part2CHList;
-//    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.chanh.toeic.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,9 +25,11 @@ public class SQLDBSource {
     public List<Questions> layDanhSachCauHoi(){
         // db.rawQuery()
         List<Questions> list = new ArrayList<Questions>();
+        String sql = "select * from " + DBManager.TB_CH;
+        Cursor c = db.rawQuery(sql,null);
 
-        String[] column = {"id","cauHoi","dapAn","ans_A","ans_B","ans_C","ans_D"};
-        Cursor c = db.query(DBManager.TB_CH,column,null,null,null,null,null);
+        //        String[] column = {"id","cauHoi","dapAn","ans_A","ans_B","ans_C","ans_D","part","traLoi"};
+//        Cursor c = db.query(DBManager.TB_CH,column,null,null,null,null,null);
         c.moveToFirst();
         while (!c.isAfterLast()){ // khong phai cuoi cung
             Questions item = new Questions();
@@ -37,7 +40,8 @@ public class SQLDBSource {
             item.setAns_B(c.getString(4));
             item.setAns_C(c.getString(5));
             item.setAns_D(c.getString(6));
-
+            item.setTraloi(c.getString(12));
+            item.setHuongDan(c.getString(11));
 
             list.add(item);
             c.moveToNext();
@@ -45,4 +49,10 @@ public class SQLDBSource {
 
         return list;
     }
+//    public  int upDateTraLoi(int id,String traLoi){
+//        ContentValues values = new ContentValues();
+//        values.put("traLoi",traLoi);
+//        return db.update(DBManager.TB_CH,values,"id= ?", new String[]{String.valueOf(id)});
+//    }
+
 }
