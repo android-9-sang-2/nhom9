@@ -2,3 +2,6 @@
 Training/toeicTest/gradlew
 Training/toeicTest/app/proguard-rules.pro
 Training/toeicTest/app/build.gradle
+Projects/TOEIC/.idea/vcs.xml
+Training/toeicTest/gradle/wrapper/gradle-wrapper.jar
+Training/toeicTest/gradle/wrapper/gradle-wrapper.properties

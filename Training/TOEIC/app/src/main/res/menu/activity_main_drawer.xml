@@ -21,14 +21,9 @@
             android:icon="@drawable/ic_download"
             android:title="Downloads Manager" />
         <item
-            android:id="@+id/nav_tips"
-            android:icon="@drawable/ic_menu_tips"
-            android:title="Tips" />
-        <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_setting"
             android:title="Settings" />
-        
     </group>
 
     <item android:title="Communicate">
