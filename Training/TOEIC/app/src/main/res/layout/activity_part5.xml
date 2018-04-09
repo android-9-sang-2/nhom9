@@ -20,25 +20,26 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="2.5"
+            android:layout_weight="2"
             android:src="@drawable/clock" />
 
         <TextView
             android:id="@+id/txtTime"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center"
             android:text="00:53"
+            android:textStyle="bold"
             android:textColor="#ffffff"
-            android:textSize="14dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/txtP2Questions"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_weight="4"
+            android:layout_marginRight="0dp"
+            android:layout_weight="3.5"
             android:gravity="center"
             android:text="1/10"
             android:textColor="#ffffff"
@@ -53,7 +54,20 @@
             android:background="@null"
             android:padding="30dp"
             android:scaleType="centerCrop"
+            android:visibility="visible"
             android:src="@drawable/done" />
+        <TextView
+            android:id="@+id/tvXemDiemP5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="40dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="Xem điểm"
+            android:visibility="gone"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout

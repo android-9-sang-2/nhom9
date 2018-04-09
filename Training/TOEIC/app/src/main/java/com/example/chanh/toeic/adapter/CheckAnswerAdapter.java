@@ -17,11 +17,10 @@ import java.util.ArrayList;
 public class CheckAnswerAdapter extends BaseAdapter {
     ArrayList lsData;
     LayoutInflater inflater;
-    SharedPreferences saveDapAn;
 
     public CheckAnswerAdapter(ArrayList lsData, Context context) {
         this.lsData = lsData;
-        saveDapAn = context.getSharedPreferences("luutruthongtin", Context.MODE_PRIVATE);
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -57,7 +56,7 @@ public class CheckAnswerAdapter extends BaseAdapter {
         }
         int i = position + 1;
 
-        holder.tvTraloi.setText(saveDapAn.getString(String.valueOf(i),""));
+        holder.tvTraloi.setText(data.getTraloi());
         holder.tvNum.setText(String.valueOf(i));
 //        holder.tvNum.setText(i + "- ");
 //        holder.tvTraloi.setText(data.getTraloi());

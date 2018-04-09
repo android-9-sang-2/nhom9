@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -34,17 +36,19 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Part5Activity extends Activity {
     private ViewPager viewPager;
     SQLDBSource db;
-    TextView txtP2Questions,txtCHP5,txtTime,tvTraloi,txtTipsP5;
+    TextView txtP2Questions,txtCHP5,txtTime,tvXemDiemP5;
     ImageButton btnPrevP5,btnNextP5;
     RadioGroup rgP5;
     ImageButton btnDoneP5;
     SharedPreferences saveDapAn;
-
-
+    CountDownTimer countDownTimer;
+    boolean flag =false;
     List<Questions> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,8 @@ public class Part5Activity extends Activity {
         setContentView(R.layout.activity_part5);
         btnNextP5 = (ImageButton) findViewById(R.id.btnNextP5);
         btnPrevP5 = (ImageButton) findViewById(R.id.btnPrevP5);
-
-        rgP5 = (RadioGroup) findViewById(R.id.rgP5);
+        tvXemDiemP5 = (TextView) findViewById(R.id.tvXemDiemP5);
+//        rgP5 = (RadioGroup) findViewById(R.id.rgP5);
         btnDoneP5 = (ImageButton) findViewById(R.id.btnDoneP5);
         txtTime = (TextView) findViewById(R.id.txtTime);
         db = new SQLDBSource(this);
@@ -62,16 +66,20 @@ public class Part5Activity extends Activity {
         saveDapAn = getSharedPreferences("luutruthongtin", Context.MODE_PRIVATE); // khong cho nuoi khac doc
 
         // coutdown...( tong thoi gian thuc hien,thoi gian thuc hien hanh dong) 1000 - 1 ms onTick se chay 1 lan. sau do se finish
-        CountDownTimer countDownTimer = new CountDownTimer(1500000,1000) {
+        countDownTimer = new CountDownTimer(150000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                txtTime.setText(String.valueOf((millisUntilFinished / 60000)+":"+(millisUntilFinished % 60000 / 1000)));
+                String text = String.format(Locale.getDefault(), "%02d:%02d", // dinh dang thoi gian 45:02
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60);
+                txtTime.setText(text);
             }
 
             @Override
             public void onFinish() {
-                txtTime.setText("Done!");
+                txtTime.setText("00:00");
             }
+
         }.start();
 
         btnNextP5.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +94,15 @@ public class Part5Activity extends Activity {
                 viewPager.setCurrentItem(getItem(-1) );
             }
         });
-//        ViewPager myview = (ViewPager) findViewById(R.id.vp_smile);
-//        final TextView txtTipsP5 = (TextView) myview.findViewById(R.id.txtTipsP5);// activiti ko tro den layout
 
 
 
     }
-
-    //
+    public void showKetQua(){
+        tvXemDiemP5.setVisibility(View.VISIBLE); // hien
+        btnDoneP5.setVisibility(View.GONE); // an
+    }
+    // luu dap an vao sharedpreferences
     private  void  luuDapAn(String cauHoi,String dapAn){
         SharedPreferences.Editor edit = saveDapAn.edit();
         edit.putString(cauHoi,dapAn);
@@ -125,11 +134,17 @@ public class Part5Activity extends Activity {
         btnKetThuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // do something
+                countDownTimer.cancel();
+                showKetQua();
+                dialog.dismiss();
+                flag=true;
+
             }
         });
+
         dialog.show();
     }
+
     // next or prev trang
     private int getItem(int i){
         return viewPager.getCurrentItem() + i;
@@ -137,6 +152,7 @@ public class Part5Activity extends Activity {
 
     private void initView() {
         viewPager = findViewById(R.id.vp_smile);
+
         final Part5Adapter adapter = new Part5Adapter(this, (ArrayList<Questions>) list);
 
         // bat su kien de lay gia tri da chon
@@ -144,9 +160,22 @@ public class Part5Activity extends Activity {
             @Override
             public void onAnswer(Questions questions, int position, Part5Adapter.AnswerTAG answer) {
                 //dap an se tra ve trong nay
-                db.layDanhSachCauHoi();
+                ViewPager view = findViewById(R.id.vp_smile);
+                RadioButton rdAP5 = (RadioButton) view.findViewById(R.id.rdAP5);
+                RadioButton rdBP5 = (RadioButton) view.findViewById(R.id.rdBP5);
+                RadioButton rdCP5 = (RadioButton) view.findViewById(R.id.rdCP5);
+                RadioButton rdDP5 = (RadioButton) view.findViewById(R.id.rdDP5);
+//                db.layDanhSachCauHoi();
                 luuDapAn(String.valueOf(position+1),answer.name());
-//                Log.e("acncd",String.valueOf(questions.getId()));
+
+                if(flag==true){
+                    if (questions.getDapAn()=="A"){
+                        rdAP5.setBackgroundColor(Color.RED);
+                    } else{}
+                }
+
+
+                Log.e("acncd",String.valueOf(flag));
 //                Log.e("TRL",answer.name() +  String.valueOf(position));
             }
         });
@@ -167,6 +196,8 @@ public class Part5Activity extends Activity {
             @Override
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
                 int vitri = position+1;
+
+
                 txtP2Questions.setText(String.valueOf(vitri)+"/"+list.size()); // set text page
                 if(position==0) {
                     btnPrevP5.setVisibility(View.INVISIBLE); // hide button
@@ -180,6 +211,7 @@ public class Part5Activity extends Activity {
                 } else {
                     btnNextP5.setVisibility(View.VISIBLE);
                 }
+
 
 
 
@@ -200,5 +232,6 @@ public class Part5Activity extends Activity {
 
         viewPager.setAdapter(adapter);
     }
+
 
 }

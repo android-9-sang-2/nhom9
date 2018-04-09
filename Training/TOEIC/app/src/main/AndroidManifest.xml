@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.Part5Activity">
+        <activity android:name=".Activity.ScreenSlideActivity">
 
             <!-- android:label="TOEIC Test" -->
             <!-- android:parentActivityName=".MainActivity" -->
@@ -36,7 +36,10 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
 
-        <!--<activity android:name=".Activity.Main2Activity"></activity>-->
+
+        <!-- <activity android:name=".Activity.Main2Activity"></activity> -->
+        <!-- <activity android:name=".Activity.ScreenSlideActivity"></activity> -->
+        <activity android:name=".Activity.chamDiem_P5Activity"></activity>
     </application>
 
 </manifest>

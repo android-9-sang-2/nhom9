@@ -1,10 +1,12 @@
 package com.example.chanh.toeic.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Pino on 3/26/2018.
  */
 
-public class Questions {
+public class Questions implements Serializable { // seria.. truyen doi tuong
     int id;
     String cauHoi;
     String dapAn;
@@ -17,7 +19,8 @@ public class Questions {
     String img;
     String audio;
     String huongDan;
-    String traloi=null;
+    String traloi="";
+    public int choiceID=-1; // check id cua radiogroup
     public String getHuongDan() {
         return huongDan;
     }

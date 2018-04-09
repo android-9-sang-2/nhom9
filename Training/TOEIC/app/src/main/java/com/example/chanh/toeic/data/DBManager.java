@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pino on 3/26/2018.
+ * Created by Duong on 3/20/2018.
  */
 
 public class DBManager extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="test.sqlite";
     public static final String TB_CH="question";
+    public static final String TB_DIEM="tbscore";
+
 
     private Context context;
     private SQLiteDatabase database;

@@ -40,7 +40,7 @@ public class SQLDBSource {
             item.setAns_B(c.getString(4));
             item.setAns_C(c.getString(5));
             item.setAns_D(c.getString(6));
-            item.setTraloi(c.getString(12));
+            item.setTraloi("");
             item.setHuongDan(c.getString(11));
 
             list.add(item);
