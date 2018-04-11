@@ -8,6 +8,11 @@
     tools:context="com.example.chanh.toeic.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <fragment
+        android:id="@+id/fragment2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <GridView
         android:id="@+id/gvMain"
         android:numColumns="2"

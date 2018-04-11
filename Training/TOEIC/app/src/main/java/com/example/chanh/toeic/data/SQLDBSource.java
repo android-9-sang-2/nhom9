@@ -22,10 +22,10 @@ public class SQLDBSource {
 
 
     }
-    public List<Questions> layDanhSachCauHoi(){
+    public List<Questions> layDanhSachCauHoi(int num_practice,String part){
         // db.rawQuery()
         List<Questions> list = new ArrayList<Questions>();
-        String sql = "select * from " + DBManager.TB_CH;
+        String sql = "select * from "+DBManager.TB_CH+" where num_practic='"+num_practice+"' and part='"+part+"'";
         Cursor c = db.rawQuery(sql,null);
 
         //        String[] column = {"id","cauHoi","dapAn","ans_A","ans_B","ans_C","ans_D","part","traLoi"};
@@ -49,10 +49,6 @@ public class SQLDBSource {
 
         return list;
     }
-//    public  int upDateTraLoi(int id,String traLoi){
-//        ContentValues values = new ContentValues();
-//        values.put("traLoi",traLoi);
-//        return db.update(DBManager.TB_CH,values,"id= ?", new String[]{String.valueOf(id)});
-//    }
+
 
 }

@@ -34,7 +34,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 6; // dinh nghia so trang
+    private static final int NUM_PAGES = 5; // dinh nghia so trang
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -52,7 +52,8 @@ public class ScreenSlideActivity extends FragmentActivity {
     ImageButton btnDoneP5;
     ArrayList<Questions> arr_Quest;
     CounterClass timer;
-
+    String part;
+    int num_practice;
     public int showAnswer=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +71,16 @@ public class ScreenSlideActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
         mPager.setPageTransformer(true, new DepthPageTransformer());
 
+
+
+        Intent intent = getIntent(); // lay ve num_practice
+        part = intent.getStringExtra("part");
+        num_practice = intent.getIntExtra("num_practice",0);
+
         arr_Quest = new ArrayList<Questions>();
         db = new SQLDBSource(this);
-        arr_Quest = (ArrayList<Questions>) db.layDanhSachCauHoi();
+        arr_Quest = (ArrayList<Questions>) db.layDanhSachCauHoi(num_practice,part);
+
         btnDoneP5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,15 +88,13 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             }
         });
-
         timer = new CounterClass(45*1000,1000);
         txtTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
-        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        });        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
                 int vitri = position+1;
@@ -133,16 +139,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 startActivity(intent);
             }
         });
-//        if(mPager.getCurrentItem()==NUM_PAGES){
-//            btnNextP5.setVisibility(View.INVISIBLE);
-//        } else {
-//            btnNextP5.setVisibility(View.VISIBLE);
-//        }
-//        if (mPager.getCurrentItem()==0){
-//            btnPrevP5.setVisibility(View.INVISIBLE);
-//        } else {
-//            btnPrevP5.setVisibility(View.VISIBLE);
-//        }
+
         btnNextP5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +154,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 mPager.setCurrentItem(trang);
             }
         });
-//        txtP2Questions.setText((mPager.getCurrentItem()+1) + "/" + (NUM_PAGES));
+
     }
 
 

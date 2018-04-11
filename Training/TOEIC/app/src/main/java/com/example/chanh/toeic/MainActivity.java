@@ -3,6 +3,7 @@ package com.example.chanh.toeic;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.example.chanh.toeic.Fragment.ListPart5Fragment;
 
 import java.util.List;
 
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -65,10 +68,17 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //chuyen qua trang kia
-                Intent intent = new Intent(MainActivity.this,TestListActivity.class);
-                intent.putExtra("TestName",ten[i]);
-                intent.putExtra("Logo",hinhanh[i]);
-                startActivity(intent);
+                switch (i){
+                    case 1: {
+//                                                ListPart5Fragment listPart5Fragment = new ListPart5Fragment();
+//                                                FragmentManager manager = getSupportFragmentManager();
+//                                                manager.beginTransaction().replace(R.id.fragment2, listPart5Fragment, listPart5Fragment.getTag()).commit();
+                    }
+                }
+//                Intent intent = new Intent(MainActivity.this,TestListActivity.class);
+//                intent.putExtra("TestName",ten[i]);
+//                intent.putExtra("Logo",hinhanh[i]);
+//                startActivity(intent);
                 //PASS INdex
 
                 //startActivity(in);

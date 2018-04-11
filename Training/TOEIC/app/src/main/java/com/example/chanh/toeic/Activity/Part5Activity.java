@@ -61,7 +61,7 @@ public class Part5Activity extends Activity {
         btnDoneP5 = (ImageButton) findViewById(R.id.btnDoneP5);
         txtTime = (TextView) findViewById(R.id.txtTime);
         db = new SQLDBSource(this);
-        list = db.layDanhSachCauHoi();
+        list = db.layDanhSachCauHoi(5,String.valueOf(5));
         initView();
         saveDapAn = getSharedPreferences("luutruthongtin", Context.MODE_PRIVATE); // khong cho nuoi khac doc
 
