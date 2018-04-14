@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activity.Main2Activity">
+        <activity android:name=".MainActivity">
 
             <!-- android:label="TOEIC Test" -->
             <!-- android:parentActivityName=".MainActivity" -->
@@ -21,21 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity android:name=".TestListActivity" /> -->
-        <!-- <activity -->
-        <!-- android:name=".TestPageActivity" -->
-        <!-- android:label="@string/title_activity_test_page" -->
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
-        <!-- <activity android:name=".ResultActivity" /> -->
-        <!-- <activity android:name=".SimulationTestActivity" /> -->
-        <!-- <activity android:name=".slide.ScreenSlideActivity"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
+         <activity android:name=".TestListActivity" />
+         <activity
+         android:name=".TestPageActivity"
+         android:label="@string/title_activity_test_page"
+         android:theme="@style/AppTheme.NoActionBar" />
+         <activity android:name=".ResultActivity" />
+         <activity android:name=".SimulationTestActivity" />
 
 
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
 
 
         <!-- <activity android:name=".Activity.Main2Activity"></activity> -->

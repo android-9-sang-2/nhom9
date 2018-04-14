@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity
 //                                                manager.beginTransaction().replace(R.id.fragment2, listPart5Fragment, listPart5Fragment.getTag()).commit();
                     }
                 }
-//                Intent intent = new Intent(MainActivity.this,TestListActivity.class);
-//                intent.putExtra("TestName",ten[i]);
-//                intent.putExtra("Logo",hinhanh[i]);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,TestListActivity.class);
+                intent.putExtra("TestName",ten[i]);
+                intent.putExtra("Logo",hinhanh[i]);
+                startActivity(intent);
                 //PASS INdex
 
                 //startActivity(in);
