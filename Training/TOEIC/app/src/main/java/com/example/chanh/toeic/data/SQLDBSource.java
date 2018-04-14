@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.chanh.toeic.model.ListPart5;
 import com.example.chanh.toeic.model.Questions;
 
 import java.util.ArrayList;
@@ -48,6 +49,21 @@ public class SQLDBSource {
         }
 
         return list;
+    }
+
+    public ArrayList<ListPart5> layDanhSachList(int part){
+        List<ListPart5> list = new ArrayList<ListPart5>();
+        String sql = "select num_practic from "+DBManager.TB_CH+" where part = '"+part+"' group by num_practic";
+        Cursor c = db.rawQuery(sql,null);
+        c.moveToFirst();
+        while (!c.isAfterLast()){ // khong phai cuoi cung
+            ListPart5 item = new ListPart5();
+            item.setName(c.getString(0));
+            list.add(item);
+            c.moveToNext();
+        }
+
+        return (ArrayList<ListPart5>) list;
     }
 
 

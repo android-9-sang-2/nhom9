@@ -53,7 +53,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     ArrayList<Questions> arr_Quest;
     CounterClass timer;
     String part;
-    int num_practice;
+    int num_practice,num_practice2;
     public int showAnswer=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         Intent intent = getIntent(); // lay ve num_practice
         part = intent.getStringExtra("part");
         num_practice = intent.getIntExtra("num_practice",0);
-
+        num_practice2 = intent.getIntExtra("num_practice2",0);
         arr_Quest = new ArrayList<Questions>();
         db = new SQLDBSource(this);
         arr_Quest = (ArrayList<Questions>) db.layDanhSachCauHoi(num_practice,part);
@@ -136,6 +136,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 //                finish(); chuyen qua man hinh chinh
                 Intent intent = new Intent(ScreenSlideActivity.this,chamDiem_P5Activity.class);
                 intent.putExtra("arr_Quest",arr_Quest); // truyen mang sang
+                intent.putExtra("num_practice2",num_practice2);
                 startActivity(intent);
             }
         });

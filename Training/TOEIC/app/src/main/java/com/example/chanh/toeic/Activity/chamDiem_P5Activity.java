@@ -2,8 +2,10 @@ package com.example.chanh.toeic.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +26,18 @@ public class chamDiem_P5Activity extends Activity {
     TextView txtTrue2P5,txtFalse2P5,txtNo2P5,txtTotal2P5;
     Button btAgainP5,btExitP5,btSaveP5;
     DiemDBSoure diemDB;
+    int num_practice;
+    SharedPreferences saveDiem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cham_diem__p5);
         Intent intent = getIntent();
         diemDB = new DiemDBSoure(chamDiem_P5Activity.this);
-
+        saveDiem = getSharedPreferences("part5", Context.MODE_PRIVATE);
         questionsArrayList = (ArrayList<Questions>) intent.getExtras().getSerializable("arr_Quest");
+
+        num_practice = intent.getIntExtra("num_practice2",0);
         begin();
         checkKetQua();
         txtNo2P5.setText(""+khongTrl);
@@ -72,10 +78,15 @@ public class chamDiem_P5Activity extends Activity {
                 final int numTotal = numTrue*5;
                 txtDiemP5.setText(numTotal+" diem");
 //                builder.setTitle("Lưu điểm");
+
+
+
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        diemDB.insertScrore(null,String.valueOf(numTotal),1);
+//                        diemDB.insertScrore(null,String.valueOf(numTotal),1);
+                        luuDiem(String.valueOf(num_practice),String.valueOf(numTotal));
+
                         Toast.makeText(chamDiem_P5Activity.this, "Save done!", Toast.LENGTH_SHORT).show();
                         finish();
                         dialog.dismiss();
@@ -92,7 +103,11 @@ public class chamDiem_P5Activity extends Activity {
             }
         });
     }
-
+    private  void  luuDiem(String num_practice,String diem){
+        SharedPreferences.Editor edit = saveDiem.edit();
+        edit.putString(num_practice,diem);
+        edit.apply();
+    }
     //anhxa
     public void begin(){
         txtFalse2P5 = (TextView) findViewById(R.id.txtFalseP52P5);

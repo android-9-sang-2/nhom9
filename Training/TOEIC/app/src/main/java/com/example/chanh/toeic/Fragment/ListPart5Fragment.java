@@ -17,6 +17,7 @@ import com.example.chanh.toeic.Activity.ScreenSlideActivity;
 import com.example.chanh.toeic.MainActivity;
 import com.example.chanh.toeic.R;
 import com.example.chanh.toeic.adapter.ListPart5Adapter;
+import com.example.chanh.toeic.data.SQLDBSource;
 import com.example.chanh.toeic.model.ListPart5;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class ListPart5Fragment extends Fragment {
     ListPart5Adapter part5Adapter;
     ListView listp5;
     ArrayList<ListPart5> part5ArrayList = new ArrayList<ListPart5>();
+    SQLDBSource db;
+
     public ListPart5Fragment() {
         // Required empty public constructor
     }
@@ -44,13 +47,18 @@ public class ListPart5Fragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        part5Adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listp5 = (ListView) getActivity().findViewById(R.id.lvpart5);
-        part5ArrayList.add(new ListPart5("Test 01"));
-        part5ArrayList.add(new ListPart5("Test 02"));
-        part5ArrayList.add(new ListPart5("Test 03"));
 
+        db=new SQLDBSource(getActivity());
+        part5ArrayList = db.layDanhSachList(5);
         part5Adapter = new ListPart5Adapter(getActivity(),part5ArrayList);
         listp5.setAdapter(part5Adapter);
         listp5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,8 +67,8 @@ public class ListPart5Fragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), ScreenSlideActivity.class);
                 intent.putExtra("num_practice",position+1);
+                intent.putExtra("num_practice2",position);
                 intent.putExtra("part","5");
-
                 startActivity(intent);
             }
         });
