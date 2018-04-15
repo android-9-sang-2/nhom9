@@ -33,7 +33,7 @@ import java.util.Calendar;
 public class Admin extends AppCompatActivity {
 
     ListView lvHinhAnh;
-    ArrayList<HinhAnh> mangHinhAnh;
+    ArrayList<HinhAnh> mangHinhAnh = new ArrayList<HinhAnh>();
     Button btnSave;
     ImageView imgHinh;
     EditText editTenHinh;
