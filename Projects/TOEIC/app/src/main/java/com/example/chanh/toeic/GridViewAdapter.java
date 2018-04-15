@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by chanh on 007, 07, 03, 2018. thu thu thu
+ * Created by chanh on 007, 07, 03, 2018.
  */
 
 public class GridViewAdapter extends BaseAdapter{

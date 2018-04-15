@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "454537744785",
+    "firebase_url": "https://toeic-4227e.firebaseio.com",
+    "project_id": "toeic-4227e",
+    "storage_bucket": "toeic-4227e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454537744785:android:23b2c7bfa19417f1",
+        "android_client_info": {
+          "package_name": "com.example.chanh.toeic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454537744785-btc2od8ajeodso597214i5dcuvpu59g7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5DCkQu3ahkA2rQqB5k9SJmj2ebJ9V1h0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

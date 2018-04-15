@@ -68,13 +68,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //chuyen qua trang kia
-                switch (i){
-                    case 1: {
-//                                                ListPart5Fragment listPart5Fragment = new ListPart5Fragment();
-//                                                FragmentManager manager = getSupportFragmentManager();
-//                                                manager.beginTransaction().replace(R.id.fragment2, listPart5Fragment, listPart5Fragment.getTag()).commit();
-                    }
-                }
+//                switch (i){
+//                    case 1: {
+////                                                ListPart5Fragment listPart5Fragment = new ListPart5Fragment();
+////                                                FragmentManager manager = getSupportFragmentManager();
+////                                                manager.beginTransaction().replace(R.id.fragment2, listPart5Fragment, listPart5Fragment.getTag()).commit();
+//                    }
+//                }
                 Intent intent = new Intent(MainActivity.this,TestListActivity.class);
                 intent.putExtra("TestName",ten[i]);
                 intent.putExtra("Logo",hinhanh[i]);

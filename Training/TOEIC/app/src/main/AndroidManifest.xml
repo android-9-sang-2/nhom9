@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity">
+        <!--<activity android:name=".MainActivity">-->
+        <activity android:name=".Admin">
 
             <!-- android:label="TOEIC Test" -->
             <!-- android:parentActivityName=".MainActivity" -->
@@ -21,21 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity android:name=".TestListActivity" />
-         <activity
-         android:name=".TestPageActivity"
-         android:label="@string/title_activity_test_page"
-         android:theme="@style/AppTheme.NoActionBar" />
-         <activity android:name=".ResultActivity" />
-         <activity android:name=".SimulationTestActivity" />
-
-
-
+        <activity android:name=".TestListActivity" />
+        <activity
+            android:name=".TestPageActivity"
+            android:label="@string/title_activity_test_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".SimulationTestActivity" />
 
         <!-- <activity android:name=".Activity.Main2Activity"></activity> -->
-         <activity android:name=".Activity.ScreenSlideActivity"></activity>
+        <activity android:name=".Activity.ScreenSlideActivity" />
         <activity android:name=".Activity.chamDiem_P5Activity" />
-        <!--<activity android:name=".Activity.Main2Activity"></activity>-->
+        <!-- <activity android:name=".Activity.Main2Activity"></activity> -->
+        <!--<activity android:name=".Admin"></activity>-->
     </application>
 
 </manifest>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin">
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageViewHinh"
+        android:layout_alignEnd="@+id/listViewHinhAnh"
+        android:text="Save Image"
+        android:layout_alignRight="@+id/listViewHinhAnh" />
+
+    <ImageView
+        android:id="@+id/imageViewHinh"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/test"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp" />
+
+    <ListView
+        android:id="@+id/listViewHinhAnh"
+        android:layout_width="333dp"
+        android:layout_height="291dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp" />
+
+    <EditText
+        android:hint="Nhập tên hình"
+        android:id="@+id/editTextTenHinh"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageViewHinh"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignRight="@+id/listViewHinhAnh" />
+</RelativeLayout>
