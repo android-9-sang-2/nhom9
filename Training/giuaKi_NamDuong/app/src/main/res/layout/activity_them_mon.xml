@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:weightSum="10"
+
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="#00c853"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal">
+        <TextView
+            android:text="THÊM MÓN ĂN VẶT"
+            android:shadowDx="0"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8.5"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:drawableLeft="@drawable/name_ic"
+                android:drawablePadding="10dp"
+                android:id="@+id/edTen"
+                android:hint="Nhập tên món ăn"
+                android:ems="14"
+
+                android:background="@drawable/input"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginBottom="10dp"
+
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:drawableLeft="@drawable/money_ic"
+                android:padding="0dp"
+                android:id="@+id/edGia"
+                android:drawablePadding="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="14"
+                android:background="@drawable/input"
+                android:hint="Nhập giá món ăn"
+                />
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/ibCapture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="fitXY"
+                android:background="@null"
+
+                android:layout_marginRight="45dp"
+                app:srcCompat="@drawable/iccamera" />
+            <ImageButton
+                android:id="@+id/ibUpload"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="fitXY"
+                android:background="@null"
+                app:srcCompat="@drawable/icupload" />
+        </LinearLayout>
+
+        <ImageView
+            android:background="@drawable/borderimg"
+            android:id="@+id/imreview"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/noimg" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+
+            <Button
+                android:id="@+id/btnHuy"
+                android:drawableLeft="@drawable/cancel"
+                android:text="Huỷ"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:layout_marginRight="20dp"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:background="@drawable/btnhuy"
+
+                />
+            <Button
+                android:id="@+id/btnThem"
+                android:drawableLeft="@drawable/add1"
+                android:text="Thêm"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:layout_width="120dp"
+                android:layout_height="39dp"
+                android:background="@drawable/addbtn"
+
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
