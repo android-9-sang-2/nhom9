@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TOEIC.iml" filepath="$PROJECT_DIR$/TOEIC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TOEIC_Duong.iml" filepath="$PROJECT_DIR$/TOEIC_Duong.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

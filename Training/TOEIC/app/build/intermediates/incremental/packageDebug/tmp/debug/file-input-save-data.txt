@@ -1,0 +1,15 @@
+#Internal package file, do not edit.
+#Sun Apr 15 18:10:52 ICT 2018
+1.base=D\:\\GitHub\\android-9-sang-2\\nhom9\\Training\\TOEIC\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+2.path=test.sqlite
+0.baseType=DIRECTORY
+2.base=D\:\\GitHub\\android-9-sang-2\\nhom9\\Training\\TOEIC\\app\\build\\intermediates\\assets\\debug
+2.set=ASSET
+1.baseType=DIRECTORY
+count=3
+1.set=DEX
+0.path=classes.dex
+0.set=DEX
+0.base=D\:\\GitHub\\android-9-sang-2\\nhom9\\Training\\TOEIC\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\11
+2.baseType=DIRECTORY
+1.path=classes.dex

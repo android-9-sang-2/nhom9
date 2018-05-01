@@ -47,7 +47,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
 
         // lay du lieu
         db = new SQLDBSource(this);
-        questionGroupList = db.laydanhSachQuestionGroup(1,1);  // truyen vao 2 gia tri
+        questionGroupList = db.laydanhSachQuestionGroup(3,1);  // truyen vao 2 gia tri
         // chay thoi gian
         timer = new DemGio(45*1000*60,1000);
         timer.start();
