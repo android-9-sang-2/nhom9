@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "736858499814",
+    "firebase_url": "https://hocvien-1520041020228.firebaseio.com",
+    "project_id": "hocvien-1520041020228",
+    "storage_bucket": "hocvien-1520041020228.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736858499814:android:5a1493725dcbcf3d",
+        "android_client_info": {
+          "package_name": "com.example.fstha.quanlysinhviendemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736858499814-f8o5sabrrjmfi2u3kj7ng3pavku6pv0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9rTY5Nxz3f4Fmlvfl8HQWGMaJJtTahlY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
