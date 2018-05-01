@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nguyendoanh.sqlite.ThemGiayActivity">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Shoes"
+        android:textColor="#67bbf7"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="1dp" />
+
+    <EditText
+
+        android:layout_gravity="center"
+        android:id="@+id/editTextTenGiay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Input shoes brand"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/editTextMoTa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:hint="Price"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="143dp" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imagebuttonCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:src="@drawable/camera" />
+
+        <ImageButton
+            android:id="@+id/imagebuttonFolder"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/open" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:id="@+id/imageviewHinh"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        android:src="@drawable/image" />
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="136dp"
+            android:layout_height="38dp"
+            android:background="@drawable/designbutton"
+            android:text="Add" />
+
+        <Button
+            android:layout_marginLeft="20dp"
+            android:id="@+id/buttonHuy"
+            android:layout_width="137dp"
+            android:layout_height="38dp"
+            android:background="@drawable/designbutton"
+            android:text="Cancel" />
+    </LinearLayout>
+</LinearLayout>

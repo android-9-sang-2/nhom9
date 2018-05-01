@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nguyendoanh.sqlite.MainActivity">
+    <TextView
+        android:textColor="#f9842b"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:text="LIST SHOES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="187dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:background="@drawable/designbutton"
+            android:id="@+id/buttonThem"
+            android:layout_width="150dp"
+            android:layout_height="39dp"
+            android:drawableLeft="@drawable/ic_action_add"
+            android:text="Add product" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listviewGiay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>
