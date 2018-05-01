@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "217061401189",
+    "firebase_url": "https://vietnamese-e00d5.firebaseio.com",
+    "project_id": "vietnamese-e00d5",
+    "storage_bucket": "vietnamese-e00d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217061401189:android:37710b881497281d",
+        "android_client_info": {
+          "package_name": "com.example.chanh.vietnamese"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217061401189-srj68kno32kogr1pcn5tv6p4uf0ocpeb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0gZl7cL5yh6wbaRat4a4PAYz1r8EUfa0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
