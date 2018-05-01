@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">QLSV</string>
+    <string name="action_new">ADD STUDENT</string>
+    <string name="action_edit">EDIT</string>
+    <string name="action_delete">DELETE</string>
+</resources>
