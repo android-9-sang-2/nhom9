@@ -36,8 +36,8 @@ public class HomeActivity extends AppCompatActivity {
         final DBManager dbManager = new DBManager(this, "toeic81");
 //        dbManager.getWritableDatabase();
 //        dbManager.getPart();
+        //lan dau tien goi getWritableDatabase se thuc hien onCreate ben DBManager.
         SQLiteDatabase db = dbManager.getWritableDatabase();
-//
 //        GridView_Works();
 
         parts = dbManager.getPartArray();
@@ -63,8 +63,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
-
-
 
     private static boolean doesDatabaseExist(Context context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);

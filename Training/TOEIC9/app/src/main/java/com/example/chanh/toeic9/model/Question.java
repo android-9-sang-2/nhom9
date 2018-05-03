@@ -1,6 +1,8 @@
 package com.example.chanh.toeic9.model;
 
 public class Question {
+    public String selectedAnswer;
+
     String indexPart;
     String indexTestSet;
     String indexQuestionGroup;
@@ -13,6 +15,9 @@ public class Question {
     String correctAnswer;
     String image;
     String note;
+
+    public Question() {
+    }
 
     public Question(String indexPart, String indexTestSet, String indexQuestionGroup, String indexQuestion, String contentQuestion, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String image, String note) {
         this.indexPart = indexPart;
@@ -27,6 +32,7 @@ public class Question {
         this.correctAnswer = correctAnswer;
         this.image = image;
         this.note = note;
+
     }
 
     public String getAnswerA() {

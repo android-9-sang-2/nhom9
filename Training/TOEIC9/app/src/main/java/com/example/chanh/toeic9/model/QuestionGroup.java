@@ -2,7 +2,8 @@ package com.example.chanh.toeic9.model;
 
 import java.io.Serializable;
 
-public class QuestionGroup implements Serializable { // seria.. truyen doi tuong
+//public class QuestionGroup implements Serializable { // seria.. truyen doi tuong
+public class QuestionGroup{ // seria.. truyen doi tuong
     String indexPart;
     String indexTestSet;
     String indexQuestionGroup;
@@ -13,6 +14,10 @@ public class QuestionGroup implements Serializable { // seria.. truyen doi tuong
         this.indexTestSet = indexTestSet;
         this.indexQuestionGroup = indexQuestionGroup;
         this.content = content;
+
+    }
+
+    public QuestionGroup() {
     }
 
     public String getIndexPart() {

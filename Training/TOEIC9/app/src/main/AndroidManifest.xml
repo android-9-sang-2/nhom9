@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".TestSetActivity"></activity>
         <activity android:name=".QuestionGroupSliderActivity"></activity>
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>

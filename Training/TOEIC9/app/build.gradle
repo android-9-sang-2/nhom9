@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:12.0.1'
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
 
 // ADD THIS AT THE BOTTOM

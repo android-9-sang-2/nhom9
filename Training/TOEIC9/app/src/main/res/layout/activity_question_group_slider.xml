@@ -81,39 +81,10 @@
             android:layout_height="match_parent">
         </android.support.v4.view.ViewPager>
     </LinearLayout>
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:background="#0288D1"-->
-    <!--android:layout_weight="1">-->
-    <!--<ImageButton-->
-    <!--android:id="@+id/btnPlay"-->
-    <!--android:layout_width="100dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:background="@null"-->
-    <!--android:paddingLeft="30dp"-->
-    <!--android:visibility="visible"-->
-    <!--android:scaleType="centerInside"-->
-    <!--android:src="@drawable/play" />-->
-    <!--<ImageButton-->
-    <!--android:id="@+id/btnPause"-->
-    <!--android:layout_width="100dp"-->
-    <!--android:visibility="gone"-->
-    <!--android:layout_height1="wrap_content"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:background="@null"-->
-    <!--android:paddingLeft="30dp"-->
-    <!--android:scaleType="centerInside"-->
-    <!--android:src="@drawable/pause"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <!--</RelativeLayout>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
         <ImageButton
             android:id="@+id/btnNext"
             android:layout_width="100dp"
@@ -123,9 +94,6 @@
             android:paddingLeft="30dp"
             android:scaleType="centerInside"
             android:src="@drawable/nextch" />
-
-
-
         <ImageButton
             android:id="@+id/btnPrev"
             android:layout_width="100dp"
@@ -135,6 +103,35 @@
             android:scaleType="centerInside"
             android:src="@drawable/prevch" />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlMediaPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#0288D1"
+        android:layout_weight="1"
+        android:gravity="center"
+        >
+        <ImageButton
+            android:id="@+id/btnPlay"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:paddingLeft="30dp"
+            android:visibility="visible"
+            android:scaleType="centerInside"
+            android:src="@drawable/play" />
+        <ImageButton
+            android:id="@+id/btnPause"
+            android:layout_width="100dp"
+            android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:paddingLeft="30dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/pause"
+            android:layout_height="wrap_content" />
 
+    </RelativeLayout>
 
 </LinearLayout>

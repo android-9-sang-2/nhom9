@@ -2,6 +2,7 @@ package com.example.chanh.toeic9.data;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
@@ -104,7 +105,7 @@ public class DBManager extends SQLiteOpenHelper {
                 for(DataSnapshot ds: dataSnapshot.child("part").getChildren()){
                     Part part = ds.getValue(Part.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
 //                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
-                    path_to_icon = saveImage(part.getIcon(), "part" + String.valueOf(i+1) +".png");  //buoc nay download
+                    path_to_icon = saveFile(part.getIcon(), "part" + String.valueOf(i+1) +".png", "image");  //buoc nay download
                     Log.d("pathtot", part.getIcon());
                     part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
                     parts[i]= part;
@@ -118,11 +119,15 @@ public class DBManager extends SQLiteOpenHelper {
                 int count_testset = (int) dataSnapshot.child("testset").getChildrenCount();
                 TestSet[] testSets = new TestSet[count_testset];
                 i=0;
+                String path_to_audio;
                 for(DataSnapshot ds: dataSnapshot.child("testset").getChildren()){
                     TestSet testSet = ds.getValue(TestSet.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
 //                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
-//                    path_to_icon = saveImage(part.getIcon(), "part" + String.valueOf(i+1) +".png");  //buoc nay download
-//                    part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
+                    Log.d("cf",testSet.getAudio() );
+                    if(!testSet.getAudio().toString().equalsIgnoreCase("")){
+                        path_to_audio = saveFile(testSet.getAudio(), "Audio_testSet" + String.valueOf(i+1) +".mp3", "audio");  //buoc nay download
+                        testSet.setAudio(path_to_audio);       //buoc nay set duoc part_name va icon_pathOFFLINE
+                    }
                     testSets[i]= testSet;
                     i++;
                 }
@@ -152,9 +157,6 @@ public class DBManager extends SQLiteOpenHelper {
                 i=0;
                 for(DataSnapshot ds: dataSnapshot.child("question").getChildren()){
                     Question question = ds.getValue(Question.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
-//                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
-//                    path_to_icon = saveImage(part.getIcon(), "part" + String.valueOf(i+1) +".png");  //buoc nay download
-//                    part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
                     questions[i]= question;
                     i++;
                 }
@@ -166,7 +168,6 @@ public class DBManager extends SQLiteOpenHelper {
 
             }
         });
-        
     }
 
 
@@ -179,11 +180,11 @@ public class DBManager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public String saveImage(String path, String name){ //save image from firebase to internal storage
+    public String saveFile(String path, String name, String fileType){ //save image from firebase to internal storage
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl(path);
         ContextWrapper cw = new ContextWrapper(context);
-        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        File directory = cw.getDir(fileType, Context.MODE_PRIVATE);
         // Create imageDir
         File mypath = new File(directory,name);
         String path_to_icon = mypath.getAbsolutePath();
@@ -290,7 +291,6 @@ public class DBManager extends SQLiteOpenHelper {
         return part;
     }
     public TestSet[] getTestSetArray(String part){
-
         SQLiteDatabase db = this.getWritableDatabase();
 //        testSets = new ArrayList<TestSet>();
         //dem so luong testset theo part
@@ -317,7 +317,31 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return testSets;
     }
-
+    public TestSet getTestSetDetail(String indexPart, String indexTestSet){
+        String selectQuery = "SELECT  * FROM TestSet WHERE indexPart=" + indexPart + " AND indexTestSet="+ indexTestSet;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        TestSet testSet = new TestSet();
+        if (cursor.moveToFirst()) {
+            do {
+                testSet.setIndexPart(cursor.getString(0));
+                testSet.setIndexTestSet(cursor.getString(1));
+                testSet.setAudio(cursor.getString(2));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return testSet;
+    }
+    public int countQuestion(String indexPart, String indexTestSet ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCount= db.rawQuery("SELECT count(*) from Question where indexPart=" + indexPart + " AND indexTestSet="+indexTestSet, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        mCount.close();
+        db.close();
+        return count;
+    }
     public QuestionGroup[] getQuestionGroupArray(String indexPart, String indexTestSet){
         SQLiteDatabase db = this.getWritableDatabase();
 //        testSets = new ArrayList<TestSet>();
@@ -386,6 +410,26 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return questions;
     }
+    public ArrayList<String> getCorrectAnswers(String indexPart, String indexTestSet){
+        ArrayList<String> correctAnswers = new ArrayList<>();
+        correctAnswers.add(""); //ko lay gia tri tai index 0
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        String correct;
+
+        String selectQuery = "SELECT correctAnswer from Question where indexPart=" + indexPart + " AND indexTestSet=" + indexTestSet;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int i=0;
+        if (cursor.moveToFirst()) {
+            do {
+                correct = cursor.getString(0);
+                correctAnswers.add(correct);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return correctAnswers;
+    }
 
 }

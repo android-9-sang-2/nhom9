@@ -1,6 +1,8 @@
 package com.example.chanh.toeic9.model;
 
-public class TestSet {
+import java.io.Serializable;
+
+public class TestSet implements Serializable {
     String indexPart;
     String indexTestSet;
     String audio;

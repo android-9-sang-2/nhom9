@@ -1,5 +1,6 @@
 package com.example.chanh.toeic9.fragment;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 
 import com.example.chanh.toeic9.QuestionGroupSliderActivity;
 import com.example.chanh.toeic9.R;
+import com.example.chanh.toeic9.data.DBManager;
+import com.example.chanh.toeic9.model.Question;
+import com.example.chanh.toeic9.model.QuestionAdapter;
 import com.example.chanh.toeic9.model.QuestionGroup;
 
 import java.util.ArrayList;
@@ -47,12 +51,20 @@ public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) { // set noi dung cho viewpager
         super.onActivityCreated(savedInstanceState);
-
         if(getItem(pageNumber).getContent()==null){
-
             tvContent.setVisibility(View.INVISIBLE);
         }
         else tvContent.setText(getItem(pageNumber).getContent());
+        //DAI them
+        Question[] questions;
+        final DBManager dbManager = new DBManager(this.getContext(), "toeic81");
+        String indexPart = getItem(pageNumber).getIndexPart();
+        String indexTestSet = getItem(pageNumber).getIndexTestSet();
+        String indexQuestionGroup = getItem(pageNumber).getIndexQuestionGroup();
+        questions = dbManager.getQuestionArray(indexPart, indexTestSet, indexQuestionGroup);
+        QuestionAdapter questionAdapter = new QuestionAdapter(this.getContext(), R.layout.question_row, questions);
+        lvQuestions.setAdapter(questionAdapter);
+//        parts = dbManager.getPartArray();
     }
     public QuestionGroup getItem(int position){ // lay gia tri dua theo vi tri
         return questionGroups[position];
@@ -65,7 +77,4 @@ public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
         fragment.setArguments(args);
         return fragment;
     }
-
-
-
 }

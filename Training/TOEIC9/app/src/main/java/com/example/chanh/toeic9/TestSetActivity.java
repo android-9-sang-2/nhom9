@@ -13,6 +13,8 @@ import com.example.chanh.toeic9.data.DBManager;
 import com.example.chanh.toeic9.model.TestSet;
 import com.example.chanh.toeic9.model.TestSetAdapter;
 
+import java.io.Serializable;
+
 public class TestSetActivity extends AppCompatActivity {
 
 //    Button btn;
@@ -32,7 +34,7 @@ public class TestSetActivity extends AppCompatActivity {
 //        count = 15;
 
         lvTestSet = findViewById(R.id.lvTestSet);
-        TestSet[] testSets;
+        final TestSet[] testSets;
         final DBManager dbManager = new DBManager(this, "toeic81");
 //        GridView_Works();
 
@@ -44,9 +46,12 @@ public class TestSetActivity extends AppCompatActivity {
         lvTestSet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TestSet testSet = testSets[i];
                 Intent intent = new Intent(TestSetActivity.this,QuestionGroupSliderActivity.class);
-                intent.putExtra("indexPart",indexPart);
-                intent.putExtra("indexTestSet",String.valueOf(i+1));
+//                intent.putExtra("indexPart",indexPart);
+//                intent.putExtra("indexTestSet",String.valueOf(i+1));
+//                intent.putExtra("audio",indexPart);
+                intent.putExtra("testSet", (Serializable) testSet);
                 startActivity(intent);
             }
         });
