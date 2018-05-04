@@ -1,0 +1,4 @@
+#Sun Apr 15 18:10:49 ICT 2018
+base.0=D\:\\GitHub\\android-9-sang-2\\nhom9\\Training\\TOEIC\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

@@ -26,7 +26,8 @@
             android:label="@string/title_activity_test_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".SimulationTestActivity"></activity>
+        <activity android:name=".SimulationTestActivity" />
+        <activity android:name=".ReviewActivity"></activity>
     </application>
 
 </manifest>

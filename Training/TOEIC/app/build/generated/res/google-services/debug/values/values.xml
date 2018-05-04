@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">454537744785-btc2od8ajeodso597214i5dcuvpu59g7.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://toeic-4227e.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">454537744785</string>
+    <string name="google_api_key" translatable="false">AIzaSyC5DCkQu3ahkA2rQqB5k9SJmj2ebJ9V1h0</string>
+    <string name="google_app_id" translatable="false">1:454537744785:android:23b2c7bfa19417f1</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC5DCkQu3ahkA2rQqB5k9SJmj2ebJ9V1h0</string>
+    <string name="google_storage_bucket" translatable="false">toeic-4227e.appspot.com</string>
+    <string name="project_id" translatable="false">toeic-4227e</string>
+</resources>

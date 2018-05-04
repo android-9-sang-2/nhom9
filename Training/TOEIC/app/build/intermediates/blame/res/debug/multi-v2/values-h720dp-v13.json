@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\GitHub\\android-9-sang-2\\nhom9\\Training\\TOEIC\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\chanh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\80d7bc9ed20c37e34eacd0fd30143142\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}

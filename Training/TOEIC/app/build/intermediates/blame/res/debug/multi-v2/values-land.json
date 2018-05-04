@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\GitHub\\android-9-sang-2\\nhom9\\Training\\TOEIC\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\chanh\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\814f86572da56b639d4b5a0bfea7f04c\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "232"
+                    },
+                    "to": {
+                        "startLines": "6",
+                        "startColumns": "4",
+                        "startOffsets": "328",
+                        "endLines": "9",
+                        "endColumns": "12",
+                        "endOffsets": "505"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\chanh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\80d7bc9ed20c37e34eacd0fd30143142\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,125,189,260",
+                        "endColumns": "69,63,70,67",
+                        "endOffsets": "120,184,255,323"
+                    }
+                }
+            ]
+        }
+    ]
+}

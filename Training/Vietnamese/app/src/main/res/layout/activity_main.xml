@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/vietnam"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <Button
+                    android:id="@+id/btnRefresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Refresh"
+                    android:background="@android:color/transparent"
+                    />
+                <Button
+                    android:paddingLeft="190dp"
+                    android:id="@+id/btnAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Admin"
+                    android:background="@android:color/transparent"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"></LinearLayout>
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/tvScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#ff0000"
+                android:text="Score"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+    <ListView
+        android:id="@+id/lvTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+</LinearLayout>
