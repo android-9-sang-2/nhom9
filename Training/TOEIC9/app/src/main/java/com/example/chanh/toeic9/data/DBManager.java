@@ -13,6 +13,7 @@ import android.util.Log;
 import com.example.chanh.toeic9.model.Part;
 import com.example.chanh.toeic9.model.Question;
 import com.example.chanh.toeic9.model.QuestionGroup;
+import com.example.chanh.toeic9.model.Score;
 import com.example.chanh.toeic9.model.TestSet;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -89,6 +90,10 @@ public class DBManager extends SQLiteOpenHelper {
 //        initIconPart();
 //        UpdatePart(db,parts);
 //        initDB(db);
+        //Nguyendoanh Create Table Score
+        sqlQuery = "CREATE TABLE Score (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL,PRIMARY KEY(indexPart,indexTestSet))";
+        db.execSQL(sqlQuery);
+        //
         mData = FirebaseDatabase.getInstance().getReference();
         Log.d("lan", "nay");
         mData.addValueEventListener(new ValueEventListener() {
@@ -244,6 +249,16 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.bindString(10, q.getCorrectAnswer());
             stmt.bindString(11, q.getImage());
             stmt.bindString(12, q.getNote());
+            stmt.execute();
+        }
+    }
+
+    public void InsertScore(Score[] score){ // NguyenDoanh
+        SQLiteDatabase db = this.getWritableDatabase();
+        for(Score sc : score){
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO Score (indexPart,indexTestSet, score) VALUES(?,?,?)");
+            stmt.bindString(1, sc.getIndexPart());
+            stmt.bindString(2, sc.getIndexTestSet());
             stmt.execute();
         }
     }

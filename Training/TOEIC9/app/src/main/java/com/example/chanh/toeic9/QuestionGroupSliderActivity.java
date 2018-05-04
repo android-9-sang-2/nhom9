@@ -175,6 +175,8 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
                 Intent intent = new Intent(QuestionGroupSliderActivity.this,ResultActivity.class);
                 intent.putExtra("count_correct_answer", countCorrectAnswer);
                 intent.putExtra("count_question", correctAnswers.size()-1);
+                intent.putExtra("index_part",indexPart);
+                intent.putExtra("index_testset",indexTestSet);
                 startActivity(intent);
 
 
