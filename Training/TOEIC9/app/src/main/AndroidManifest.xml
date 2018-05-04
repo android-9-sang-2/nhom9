@@ -12,12 +12,14 @@
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestSetActivity"></activity>
-        <activity android:name=".QuestionGroupSliderActivity"></activity>
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".TestSetActivity" />
+        <activity android:name=".QuestionGroupSliderActivity" />
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".ReviewActivity"></activity>
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@
             android:title="Downloads Manager" />
         <item
             android:id="@+id/nav_tips"
-            android:icon="@drawable/ic_menu_tips"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Tips" />
         <item
             android:id="@+id/nav_setting"
