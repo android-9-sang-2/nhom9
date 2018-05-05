@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
+import android.support.design.widget.NavigationView;
 import android.util.Log;
 
 import com.example.chanh.toeic9.model.GridViewAdapter;
@@ -23,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 
 public class HomeActivity extends AppCompatActivity {
-    public boolean reviewmode=false;
 
     GridView gvHome;
     String[] partNames = new String[7];
