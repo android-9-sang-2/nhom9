@@ -91,7 +91,7 @@ public class DBManager extends SQLiteOpenHelper {
 //        UpdatePart(db,parts);
 //        initDB(db);
         //Nguyendoanh Create Table Score
-        sqlQuery = "CREATE TABLE Score (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL,PRIMARY KEY(indexPart,indexTestSet))";
+        sqlQuery = "CREATE TABLE Score (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL, Score TEXT NOT NULL PRIMARY KEY(indexPart,indexTestSet,Score))";
         db.execSQL(sqlQuery);
         //
         mData = FirebaseDatabase.getInstance().getReference();
@@ -252,15 +252,33 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
-
-    public void InsertScore(Score[] score){ // NguyenDoanh
+// Doanh dang o day
+    public void InsertScore(String indexPart,String indexTestSet, String currentscore){ // NguyenDoanh
         SQLiteDatabase db = this.getWritableDatabase();
-        for(Score sc : score){
+        Cursor mCount= db.rawQuery("SELECT count(*),score from Score where indexPart=" + indexPart +" and indexTestSet = " + indexTestSet + " ", null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        if(count == 0) {
+            // Thuc hien insert vao bang neu chua co du lieu
             SQLiteStatement stmt = db.compileStatement("INSERT INTO Score (indexPart,indexTestSet, score) VALUES(?,?,?)");
-            stmt.bindString(1, sc.getIndexPart());
-            stmt.bindString(2, sc.getIndexTestSet());
+            stmt.bindString(1, indexPart);
+            stmt.bindString(2, indexTestSet);
+            stmt.bindString(3, currentscore);
             stmt.execute();
         }
+        else {
+            int  score = Integer.valueOf(mCount.getString(1));
+            int  currentscore1 = Integer.valueOf(currentscore);
+            if(currentscore1 > score){
+                SQLiteStatement stmt = db.compileStatement("UPDATE Score SET score = ? WHERE indexPart = ? AND indexTestSet = ? ");
+                stmt.bindString(1, currentscore);
+                stmt.bindString(2, indexPart);
+                stmt.bindString(3, indexTestSet);
+                stmt.execute();
+            }
+        }
+
+
     }
 
 

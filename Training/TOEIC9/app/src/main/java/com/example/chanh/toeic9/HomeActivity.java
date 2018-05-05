@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Log.d("oncreate", "oncreate");
-        final DBManager dbManager = new DBManager(this, "toeic81");
+        final DBManager dbManager = new DBManager(this, "toeihc81");
 //        dbManager.getWritableDatabase();
 //        dbManager.getPart();
         //lan dau tien goi getWritableDatabase se thuc hien onCreate ben DBManager.

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.chanh.toeic9.data.DBManager;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -22,18 +23,22 @@ import java.util.List;
 
 public class ResultActivity extends AppCompatActivity {
     PieChart pieChart;
-    private int incorrect,sum,result,correct_answer,indextestset,indexpart;
+    private int incorrect,sum,result;
+    private int correct_answer,indextestset;
+    private int indexpart,score;
     TextView tvsum,tvcorrect_answer;
     Button btnreview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        final DBManager dbManager = new DBManager(this, "toeic81");
+        dbManager.InsertScore(String.valueOf(indexpart),String.valueOf(indextestset),String.valueOf(score));
         Intent intent = getIntent();
         // Get intent tu QuestionGroup
         correct_answer = intent.getIntExtra("count_correct_answer",1);
         sum = intent.getIntExtra("count_question",1);
-        indexpart = intent.getIntExtra("index__part",1);
+        indexpart = intent.getIntExtra("index_part",1);
         indextestset = intent.getIntExtra("index_test",1);
         setTitle("Part " + indexpart + "- TestSet " + indextestset);
 //        final String testname=intent.getStringExtra("TestName");
@@ -41,7 +46,11 @@ public class ResultActivity extends AppCompatActivity {
         result = (correct_answer/sum) * 100 ;
         Anhxa();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final String testname=intent.getStringExtra("testname");
+
+      // Set Title name
+        final String testname=intent.getStringExtra("RESULT");
+        setTitle(testname);
+
         //--------------
         String ten = "" + String.valueOf(correct_answer) + " / " + String.valueOf(sum);
         pieChart = findViewById(R.id.pcResult);
