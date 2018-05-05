@@ -1,6 +1,5 @@
 package com.example.chanh.toeic9.fragment;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,14 +16,12 @@ import com.example.chanh.toeic9.model.Question;
 import com.example.chanh.toeic9.model.QuestionAdapter;
 import com.example.chanh.toeic9.model.QuestionGroup;
 
-import java.util.ArrayList;
-
 public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
     QuestionGroup questionGroups[];
     public static final String ARG_PAGE = "page";
     private int pageNumber;
-    TextView tvContent;
-    ImageView imgP1;
+    TextView  tvContent1;
+    ImageView  imgP11;
     ListView lvQuestions;
     public GroupQuestionPageFragment(){
 
@@ -44,9 +41,11 @@ public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) { // tao view
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.content_questiongroup,container,false);
-        tvContent = (TextView) view.findViewById(R.id.tvContent);
         lvQuestions = (ListView) view.findViewById(R.id.lvQuestions);
-        imgP1 = (ImageView) view.findViewById(R.id.imgP1);
+        View header = getLayoutInflater().inflate(R.layout.header, null, false);
+        lvQuestions.addHeaderView(header);
+        imgP11 = (ImageView)lvQuestions.findViewById(R.id.imgP11);
+        tvContent1 = (TextView) lvQuestions.findViewById(R.id.tvContent1);
         return view;
     }
 
@@ -54,11 +53,13 @@ public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) { // set noi dung cho viewpager
         super.onActivityCreated(savedInstanceState);
         if(getItem(pageNumber).getContent()==null){
-            tvContent.setVisibility(View.INVISIBLE);
+            tvContent1.setVisibility(View.INVISIBLE);
         }
-        else tvContent.setText(getItem(pageNumber).getContent());
+        else {
+            tvContent1.setText(getItem(pageNumber).getContent());
+        }
         if(getItem(pageNumber).getIndexPart().equals("1")){
-            imgP1.setVisibility(View.VISIBLE);
+            imgP11.setVisibility(View.VISIBLE);
         }
         //DAI them
         Question[] questions;

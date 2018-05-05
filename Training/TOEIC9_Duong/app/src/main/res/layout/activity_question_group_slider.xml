@@ -1,142 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
-
+    android:layout_height="fill_parent"
+    >
     <LinearLayout
+        android:id="@+id/sp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#0288D1"
-        android:orientation="horizontal"
-        android:weightSum="10">
-
-
-        <ImageView
-            android:id="@+id/clock"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:src="@drawable/clock" />
-
-        <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="00:53"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/txtQuestions"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="0dp"
-            android:layout_weight="3.5"
-            android:gravity="center"
-            android:text="1/10"
-            android:textColor="#ffffff"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/btnDone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="@null"
-            android:padding="30dp"
-            android:scaleType="centerCrop"
-            android:visibility="visible"
-            android:src="@drawable/done" />
-        <TextView
-            android:id="@+id/tvXemDiem"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="40dp"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="Xem điểm"
-            android:visibility="gone"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/llviewpager"
-        android:layout_weight="6.5"
-        android:gravity="center">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v4.view.ViewPager>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#0288D1"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/clock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:src="@drawable/clock" />
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="00:53"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtQuestions"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="0dp"
+                android:layout_weight="3.5"
+                android:gravity="center"
+                android:text="1/10"
+                android:textColor="#ffffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btnDone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@null"
+                android:padding="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/done"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvXemDiem"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="40dp"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="Xem điểm"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llviewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            >
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        </LinearLayout>
     </LinearLayout>
+
     <RelativeLayout
+        android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8">
-        <ImageButton
-            android:id="@+id/btnNext"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@null"
-            android:paddingLeft="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/nextch" />
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        >
         <ImageButton
             android:id="@+id/btnPrev"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:scaleType="centerInside"
-            android:src="@drawable/prevch" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rlMediaPlayer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10px"
-        android:background="#0288D1"
-        android:layout_weight="1.1"
-        android:gravity="center"
-        >
-
-        <ImageButton
-            android:id="@+id/btnPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:background="@null"
-            android:visibility="visible"
-            android:src="@drawable/play" />
+            android:src="@drawable/prevch"
+            />
+        <RelativeLayout
+            android:id="@+id/rlMediaPlayer"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/btnPrev"
+            android:layout_toLeftOf="@id/btnNext"
+            android:layout_height="180dp"
+            >
+            <SeekBar
+                android:id="@+id/sbMedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:src="@drawable/play"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/sbMedia"
+                />
 
-        <SeekBar
-            android:id="@+id/sbMedia"
-            android:layout_centerInParent="true"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content" />
-
+        </RelativeLayout>
         <ImageButton
-            android:id="@+id/btnStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+            android:id="@+id/btnNext"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:src="@drawable/stop"
-            android:visibility="visible" />
+            android:scaleType="centerInside"
+            android:src="@drawable/nextch"
+            android:layout_alignParentEnd="true"
+            />
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

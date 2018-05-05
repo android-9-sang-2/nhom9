@@ -4,30 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center">
-
-    <TextView
-        android:id="@+id/tvContent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Here is a paragraph " />
-
-    <ImageView
-        android:layout_gravity="center"
-        android:id="@+id/imgP1"
-        android:layout_width="250dp"
-        android:visibility="gone"
-        android:src="@drawable/hinhdemo"
-        android:scaleType="fitXY"
-        android:layout_height="170dp" />
+    android:layout_gravity="top"
+    >
     <ListView
         android:id="@+id/lvQuestions"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:divider="@null"
+        >
     </ListView>
-
-
 </LinearLayout>

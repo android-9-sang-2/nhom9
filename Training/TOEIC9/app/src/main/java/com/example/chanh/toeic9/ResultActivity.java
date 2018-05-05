@@ -35,16 +35,15 @@ public class ResultActivity extends AppCompatActivity {
         sum = intent.getIntExtra("count_question",1);
         indexpart = intent.getIntExtra("index__part",1);
         indextestset = intent.getIntExtra("index_test",1);
-
+        setTitle("Part " + indexpart + "- TestSet " + indextestset);
 //        final String testname=intent.getStringExtra("TestName");
         incorrect = sum - correct_answer;
         result = (correct_answer/sum) * 100 ;
         Anhxa();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final String testname=intent.getStringExtra("testname");
-        setTitle(testname);
         //--------------
-        String ten = "" + String.valueOf(correct_answer) + " / " + String.valueOf(sum) + " --"  + indexpart + indextestset;
+        String ten = "" + String.valueOf(correct_answer) + " / " + String.valueOf(sum);
         pieChart = findViewById(R.id.pcResult);
         pieChart.getDescription().setEnabled(false);
         pieChart.getLegend().setEnabled(false);

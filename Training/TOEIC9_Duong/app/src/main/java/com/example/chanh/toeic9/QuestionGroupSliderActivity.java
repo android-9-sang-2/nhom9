@@ -2,12 +2,14 @@ package com.example.chanh.toeic9;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -51,11 +53,11 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
     //    SQLDBSource db;
     DemGio timer;
     TextView txtTime,tvXemDiem,txtQuestions;
-    ImageButton btnPrev,btnNext,btnDone, btnPlay, btnStop;
+    ImageButton btnPrev,btnNext,btnDone, btnPlay;
     SeekBar sbMedia;
     LinearLayout llviewpager;
     QuestionGroup[] questionGroupArray;
-    RelativeLayout rlMediaPlayer;
+    RelativeLayout rlMediaPlayer, footer;
     String part;
     int thoigian;
 
@@ -106,7 +108,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
         llviewpager= (LinearLayout) findViewById(R.id.llviewpager);
         rlMediaPlayer= findViewById(R.id.rlMediaPlayer);
         btnPlay = findViewById(R.id.btnPlay);
-        btnStop = findViewById(R.id.btnStop);
+
         txtTime = (TextView) findViewById(R.id.txtTime);
         tvXemDiem = (TextView) findViewById(R.id.tvXemDiem);
         txtQuestions = (TextView) findViewById(R.id.txtQuestions);
@@ -115,6 +117,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
         btnNext = (ImageButton) findViewById(R.id.btnNext);
         btnDone = (ImageButton) findViewById(R.id.btnDone);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        footer = findViewById(R.id.footer);
     }
     public void hienDuLieuTheoPart(){
         if(indexPart.equalsIgnoreCase("1")
@@ -122,6 +125,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
                 || indexPart.equalsIgnoreCase("3")
                 || indexPart.equalsIgnoreCase("4")){
             rlMediaPlayer.setVisibility(View.VISIBLE);
+            footer.setBackgroundColor(Color.parseColor("#0288D1"));
         }
         else {
             rlMediaPlayer.setVisibility(View.INVISIBLE);
@@ -161,16 +165,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
             }
         });
         khoiTaoMediaPlayer();
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnPlay.setImageResource(R.drawable.play);
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                handler.removeCallbacksAndMessages(null);
-                khoiTaoMediaPlayer();
-            }
-        });
+
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,7 +269,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        handler.removeCallbacksAndMessages(null);
+//        handler.removeCallbacksAndMessages(null);
         mediaPlayer.stop(); // stop khi out
 
     }
@@ -303,7 +298,6 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() { // xong media
             @Override
             public void onCompletion(MediaPlayer mp) {
-
                 mediaPlayer.release();
                 btnPlay.setImageResource(R.drawable.play);
                 // xu ly su kien o day
