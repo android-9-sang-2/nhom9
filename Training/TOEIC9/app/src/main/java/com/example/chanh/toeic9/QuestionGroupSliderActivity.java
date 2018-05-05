@@ -235,6 +235,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
             txtTime.setText("00:00"); // khi ket thuc dat gia tri bang 0
         }
     }
+
     private class QuestionGroupPagerAdapter extends FragmentStatePagerAdapter {
         public QuestionGroupPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);

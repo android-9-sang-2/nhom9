@@ -32,7 +32,6 @@ public class Question {
         this.correctAnswer = correctAnswer;
         this.image = image;
         this.note = note;
-
     }
 
     public String getAnswerA() {

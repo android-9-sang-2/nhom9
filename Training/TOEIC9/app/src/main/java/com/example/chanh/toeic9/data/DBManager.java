@@ -97,8 +97,6 @@ public class DBManager extends SQLiteOpenHelper {
         mData = FirebaseDatabase.getInstance().getReference();
         Log.d("lan", "nay");
         mData.addValueEventListener(new ValueEventListener() {
-
-
             Part[] parts;
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

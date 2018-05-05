@@ -49,7 +49,7 @@ public class ResultActivity extends AppCompatActivity {
         btnreview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ResultActivity.this,ReviewActivity.class);
+                Intent intent1 = new Intent(ResultActivity.this, ReviewActivity.class);
                 startActivity(intent1);
             }
         });

@@ -1,17 +1,16 @@
 package com.example.chanh.toeic9;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.chanh.toeic9.data.DBManager;
 import com.example.chanh.toeic9.model.TestSet;
 import com.example.chanh.toeic9.model.TestSetAdapter;
+import com.example.chanh.toeic9.HomeActivity;
 
 import java.io.Serializable;
 
@@ -48,7 +47,7 @@ public class TestSetActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TestSet testSet = testSets[i];
                 Intent intent = new Intent(TestSetActivity.this,QuestionGroupSliderActivity.class);
-//                intent.putExtra("indexPart",indexPart);
+                intent.putExtra("indexPart",indexPart);
 //                intent.putExtra("indexTestSet",String.valueOf(i+1));
 //                intent.putExtra("audio",indexPart);
                 intent.putExtra("testSet", (Serializable) testSet);

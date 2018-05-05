@@ -23,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 
 public class HomeActivity extends AppCompatActivity {
+    public boolean reviewmode=false;
+
     GridView gvHome;
     String[] partNames = new String[7];
     String[] icons = new String[7];

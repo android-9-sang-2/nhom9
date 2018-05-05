@@ -1,6 +1,7 @@
 package com.example.chanh.toeic9.model;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import com.example.chanh.toeic9.QuestionGroupSliderActivity;
 import com.example.chanh.toeic9.R;
 
 import java.util.ArrayList;
@@ -22,12 +21,14 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
     private Context context;
     private int resource;
     private Question[] questions;
+    private boolean reviewmode;
 
-    public QuestionAdapter(@NonNull Context context, int resource, @NonNull Question[] questions) {
+    public QuestionAdapter(@NonNull Context context, int resource, boolean reviewmode, @NonNull Question[] questions) {
         super(context, resource, questions);
         this.context = context;
         this.resource = resource;
         this.questions = questions;
+        this.reviewmode = reviewmode;
 
     }
     @NonNull
@@ -42,19 +43,67 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         RadioButton rbC;
         RadioButton rbD;
         RadioGroup rg;
+        TextView tvTip;
         tvQuestion = (TextView) convertView.findViewById(R.id.tvquestion);
         rbA = (RadioButton) convertView.findViewById(R.id.rbA);
         rbB = (RadioButton) convertView.findViewById(R.id.rbB);
         rbC = (RadioButton) convertView.findViewById(R.id.rbC);
         rbD = (RadioButton) convertView.findViewById(R.id.rbD);
         rg =(RadioGroup) convertView.findViewById(R.id.rgAnswer);
+        tvTip = (TextView) convertView.findViewById(R.id.tvTip);
 //        tvAnswer = (TextView) convertView.findViewById(R.id.tvAnswer);
         Question q = questions[position];
-        tvQuestion.setText(q.getIndexQuestion() + ". " + q.getContentQuestion());
+
+
+        tvQuestion.setText("Question " + q.getIndexQuestion() + ". " + q.getContentQuestion());
         rbA.setText("A. " + q.getAnswerA());
         rbB.setText("B. " +q.getAnswerB());
         rbC.setText("C. " +q.getAnswerC());
         rbD.setText("D. " +q.getAnswerD());
+        tvTip.setText("Explain: " + q.getNote());
+        //phan 2 ko hien thi dap an D
+        if(questions[position].getIndexPart().equalsIgnoreCase("2")){
+            rbD.setVisibility(View.GONE);
+        }
+        //MODE-DAi
+        if(!reviewmode){
+            if(questions[position].getIndexPart().equalsIgnoreCase("1") || questions[position].getIndexPart().equalsIgnoreCase("2")){
+                tvQuestion.setText("Question " + q.getIndexQuestion());
+                rbA.setText("A");
+                rbB.setText("B");
+                rbC.setText("C");
+                rbD.setText("D");
+            }
+        }
+        else{
+            rbA.setClickable(false);
+            rbB.setClickable(false);
+            rbC.setClickable(false);
+            rbD.setClickable(false);
+            if(questions[position].getIndexPart().equalsIgnoreCase("5")
+                    || questions[position].getIndexPart().equalsIgnoreCase("6")
+                    || questions[position].getIndexPart().equalsIgnoreCase("7")
+                    ) {
+                tvTip.setVisibility(View.VISIBLE);
+            }
+            String correct = questions[position].getCorrectAnswer();
+            switch (correct){
+                case "A":
+                    rbA.setTextColor(Color.GREEN);
+                    break;
+                case "B":
+                    rbB.setTextColor(Color.GREEN);
+                    break;
+                case "C":
+                    rbC.setTextColor(Color.GREEN);
+                    break;
+                case "D":
+                    rbD.setTextColor(Color.GREEN);
+                    break;
+            }
+        }
+        //
+
         String choice = "";
         if(q.selectedAnswer==null){
             if(!selectedAnswers.get(Integer.valueOf(q.getIndexQuestion())).equals("null")){ //neu cau hoi do da duoc chon, ko phai set lai
@@ -66,8 +115,11 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         }
         else{  //truong hop nay dc goi tu khi onDataChanged notify
             //ca truong hop cau hoi duoc chon hay ko dc chon deu phai add vao ArrayList va set choice
-            selectedAnswers.set(Integer.valueOf(q.getIndexQuestion()), q.selectedAnswer);
-            choice = q.selectedAnswer;
+//            if(!reviewmode){
+                selectedAnswers.set(Integer.valueOf(q.getIndexQuestion()), q.selectedAnswer);
+                choice = q.selectedAnswer;
+//            }
+
         }
         if (choice.equals("A")){
             rbA.setChecked(true);

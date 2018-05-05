@@ -1,7 +1,6 @@
 package com.example.chanh.toeic9;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -9,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +16,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,13 +25,12 @@ import android.widget.Toast;
 
 import com.example.chanh.toeic9.data.DBManager;
 import com.example.chanh.toeic9.fragment.GroupQuestionPageFragment;
-import com.example.chanh.toeic9.model.Question;
 import com.example.chanh.toeic9.model.QuestionGroup;
 import com.example.chanh.toeic9.model.TestSet;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 public class QuestionGroupSliderActivity extends FragmentActivity {
     public static ArrayList<String> selectedAnswers;
     public ArrayList<String> correctAnswers; //se lay ngay tu dau
-
+    public boolean reviewmode;
 
     TestSet testSet;
     String indexPart, indexTestSet, audio;
@@ -63,11 +59,19 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
 
     MediaPlayer mediaPlayer;
     @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(QuestionGroupSliderActivity.this,TestSetActivity.class);
+        intent.putExtra("indexPart", indexPart);
+        startActivity(intent);
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_group_slider);
         Intent intent = getIntent();
         testSet = (TestSet) intent.getSerializableExtra("testSet");
+        reviewmode = intent.getBooleanExtra("reviewmode",false);
         indexPart = testSet.getIndexPart();
         indexTestSet = testSet.getIndexTestSet();
         audio = testSet.getAudio();
@@ -81,6 +85,10 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
         selectedAnswers = new ArrayList<>();
         for (int i = 0; i <= count; i++) {   //ko su dung index 0
             selectedAnswers.add("null");
+        }
+        //nhan du lieu tu REVIEW
+        if(reviewmode){
+            selectedAnswers = intent.getStringArrayListExtra("selectedAnswers");
         }
 
         AnhXa();
@@ -126,10 +134,14 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
                 || indexPart.equalsIgnoreCase("4")){
             rlMediaPlayer.setVisibility(View.VISIBLE);
             footer.setBackgroundColor(Color.parseColor("#0288D1"));
+            //DAI
+            if(!reviewmode){
+
+            }
         }
         else {
             rlMediaPlayer.setVisibility(View.INVISIBLE);
-            ViewGroup.LayoutParams params = llviewpager.getLayoutParams(); // xet lai height cho listviewpager
+            ViewGroup.LayoutParams params = llviewpager.getLayoutParams(); // set lai height cho listviewpager
             params.height = 280;
             llviewpager.setLayoutParams(params);
         }
@@ -220,6 +232,8 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
                 Intent intent = new Intent(QuestionGroupSliderActivity.this,ResultActivity.class);
                 intent.putExtra("count_correct_answer", countCorrectAnswer);
                 intent.putExtra("count_question", correctAnswers.size()-1);
+                intent.putExtra("testSet", (Serializable) testSet);//truyen 1 object boo de(indexPart, indexTestSet, audio) de cho nut REVIEW
+                intent.putStringArrayListExtra("selectedAnswers", selectedAnswers);
                 startActivity(intent);
 
 
@@ -342,6 +356,10 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
 
     public QuestionGroup[] getData(){
         return  questionGroupArray;
+    }
+
+    public boolean getMode(){
+        return reviewmode;
     }
     public class chuyenTrang implements ViewPager.PageTransformer{
         private static final float MIN_SCALE = 0.75f;
