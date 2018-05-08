@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestSetActivity">
+    tools:context=".activity.TestSetActivity">
     <ListView
         android:id="@+id/lvTestSet"
         android:layout_width="match_parent"

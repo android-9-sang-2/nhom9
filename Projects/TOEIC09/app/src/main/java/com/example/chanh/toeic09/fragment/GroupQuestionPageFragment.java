@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.chanh.toeic09.QuestionGroupSliderActivity;
+import com.example.chanh.toeic09.activity.QuestionGroupSliderActivity;
 import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
 import com.example.chanh.toeic09.model.Question;
-import com.example.chanh.toeic09.model.QuestionAdapter;
+import com.example.chanh.toeic09.adapter.QuestionAdapter;
 import com.example.chanh.toeic09.model.QuestionGroup;
 
 public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{

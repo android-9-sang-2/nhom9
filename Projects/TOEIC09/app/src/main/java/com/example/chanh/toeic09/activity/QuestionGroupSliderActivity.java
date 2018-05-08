@@ -1,4 +1,4 @@
-package com.example.chanh.toeic09;
+package com.example.chanh.toeic09.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
 import com.example.chanh.toeic09.fragment.GroupQuestionPageFragment;
 import com.example.chanh.toeic09.model.QuestionGroup;

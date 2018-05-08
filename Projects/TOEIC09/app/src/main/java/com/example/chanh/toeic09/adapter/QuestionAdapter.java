@@ -1,4 +1,4 @@
-package com.example.chanh.toeic09.model;
+package com.example.chanh.toeic09.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,8 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.chanh.toeic09.R;
+import com.example.chanh.toeic09.model.Question;
 
-import static com.example.chanh.toeic09.QuestionGroupSliderActivity.selectedAnswers;
+import static com.example.chanh.toeic09.activity.QuestionGroupSliderActivity.selectedAnswers;
 
 public class QuestionAdapter extends ArrayAdapter<Question> {
     private Context context;

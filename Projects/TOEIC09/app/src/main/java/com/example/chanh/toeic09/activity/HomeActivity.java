@@ -1,4 +1,4 @@
-package com.example.chanh.toeic09;
+package com.example.chanh.toeic09.activity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,8 +16,9 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
-import com.example.chanh.toeic09.model.GridViewAdapter;
+import com.example.chanh.toeic09.adapter.GridViewAdapter;
 import com.example.chanh.toeic09.model.Part;
 import com.google.firebase.database.DatabaseReference;
 
@@ -117,13 +118,12 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_tip) {
+            Intent intent = new Intent(HomeActivity.this, TipsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_vocabulary) {
 
-        } else if (id == R.id.nav_exit) {
-
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

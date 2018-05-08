@@ -1,4 +1,4 @@
-package com.example.chanh.toeic09;
+package com.example.chanh.toeic09.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
 import com.example.chanh.toeic09.model.TestSet;
 import com.github.mikephil.charting.charts.PieChart;

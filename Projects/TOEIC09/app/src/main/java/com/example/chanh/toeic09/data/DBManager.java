@@ -13,6 +13,7 @@ import com.example.chanh.toeic09.model.Part;
 import com.example.chanh.toeic09.model.Question;
 import com.example.chanh.toeic09.model.QuestionGroup;
 import com.example.chanh.toeic09.model.TestSet;
+import com.example.chanh.toeic09.model.Tips;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper {
     DatabaseReference mData;
@@ -64,24 +66,19 @@ public class DBManager extends SQLiteOpenHelper {
         String sqlQuery="";
         //1. Tao bang Parts
         sqlQuery ="CREATE TABLE Part (indexPart TEXT NOT NULL, name TEXT NOT NULL, icon TEXT, PRIMARY KEY(indexPart))";
-//        sqlQuery ="CREATE TABLE Parts (indexPart INTEGER NOT NULL, name TEXT NOT NULL, icon TEXT, PRIMARY KEY(indexPart))";
         db.execSQL(sqlQuery);
         //  2. Tao bang TestSet
         sqlQuery = "CREATE TABLE TestSet(indexPart TEXT NOT NULL, indexTestSet TEXT NOT NULL, audio TEXT ,PRIMARY KEY(indexTestSet,indexPart),FOREIGN KEY(indexPart) REFERENCES Part(indexPart))";
-//        sqlQuery = "CREATE TABLE TestSet(indexPart INTEGER NOT NULL, indexTestSet INTEGER NOT NULL, audio TEXT ,PRIMARY KEY(indexTestSet,indexPart),FOREIGN KEY(indexPart) REFERENCES Part(indexPart))";
-//        sqlQuery = "CREATE TABLE TestSet(ID_TestSet TEXT NOT NULL, index_number INTEGER NOT NULL, part INTEGER NOT NULL, audio_path TEXT, PRIMARY KEY(ID_TestSet), FOREIGN KEY(part) REFERENCES Parts(ID_Part));";
-//        sqlQuery = "CREATE TABLE TestSet(ID_TestSet TEXT NOT NULL, index_number INTEGER NOT NULL, part INTEGER NOT NULL, audio_path TEXT, PRIMARY KEY(ID_TestSet), FOREIGN KEY(part) REFERENCES Parts(ID_Part));";
         db.execSQL(sqlQuery);
         //3. Tao bang QuestionGroup
         sqlQuery = "CREATE TABLE QuestionGroup (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL,indexQuestionGroup TEXT NOT NULL,content TEXT,PRIMARY KEY(indexQuestionGroup,indexTestSet,indexPart))";
-//        sqlQuery = "CREATE TABLE QuestionGroup (indexPart INTEGER NOT NULL,indexTestSet INTEGER NOT NULL,indexQuestionGroup INTEGER NOT NULL,content TEXT,PRIMARY KEY(indexQuestionGroup,indexTestSet,indexPart))";
-//        sqlQuery = "CREATE TABLE QuestionGroup (ID_QuestionGroup INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, test_set TEXT, FOREIGN KEY(test_set) REFERENCES TestSet(ID_TestSet) )";
         db.execSQL(sqlQuery);
         //4. Tao bang Question
         sqlQuery = "CREATE TABLE Question (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL,indexQuestionGroup TEXT NOT NULL,indexQuestion TEXT NOT NULL,contentQuestion TEXT,answerA TEXT NOT NULL,answerB TEXT NOT NULL,answerC TEXT NOT NULL,answerD TEXT,correctAnswer TEXT NOT NULL,image TEXT,note TEXT,PRIMARY KEY(indexPart,indexTestSet,indexQuestionGroup,indexQuestion))";
-//        sqlQuery = "CREATE TABLE Question (indexPart INTEGER NOT NULL,indexTestSet INTEGER NOT NULL,indexQuestionGroup INTEGER NOT NULL,indexQuestion INTEGER NOT NULL,contentQuestion TEXT,A TEXT NOT NULL,B TEXT NOT NULL,C TEXT NOT NULL,D TEXT,correctAnswer TEXT NOT NULL,image TEXT,note TEXT,PRIMARY KEY(indexPart,indexTestSet,indexQuestionGroup,indexQuestion))";
-        //sqlQuery = "CREATE TABLE Question(question TEXT, A TEXT, B TEXT, C TEXT, D TEXT, correct_answer TEXT, note TEXT, question_group TEXT NOT NULL, image_path TEXT, FOREIGN KEY(question_group) REFERENCES QuestionGroup(ID_QuestionGroup) )";
-        //sqlQuery = "CREATE TABLE Question(question TEXT, A TEXT, B TEXT, C TEXT, D TEXT, correct_answer TEXT, note TEXT, question_group TEXT NOT NULL, image_path TEXT, FOREIGN KEY(question_group) REFERENCES QuestionGroup(ID_QuestionGroup) )";
+        db.execSQL(sqlQuery);
+        //Tạo bảng Tip_DUY
+        sqlQuery = "CREATE TABLE Tips(indexTip INTEGER NOT NULL, indexPart INTEGER NOT NULL,contentTip TEXT NOT NULL,titleTip TEXT NOT NULL, PRIMARY KEY(indexTip,indexPart))";
+
         db.execSQL(sqlQuery);
         //lan dau tien cai dat thi ket noi den firebase
         //-Lay xuong so luong part, danh sach TestList
@@ -107,11 +104,10 @@ public class DBManager extends SQLiteOpenHelper {
                     Part part = ds.getValue(Part.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
 //                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
                     path_to_icon = saveFile(part.getIcon(), "part" + String.valueOf(i+1) +".png", "image");  //buoc nay download
-                    Log.d("pathtot", part.getIcon());
+
                     part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
                     parts[i]= part;
 
-                    Log.d("thanhtam", part.getName());
                     i++;
                 }
                 UpdatePart(parts);
@@ -163,6 +159,18 @@ public class DBManager extends SQLiteOpenHelper {
                 }
                 UpdateQuestion(questions);
                 //HET BANG QUESTION
+
+                //BANG TIPS
+                int count_TIP = (int) dataSnapshot.child("tips").getChildrenCount();
+                Tips[] tips= new Tips[count_TIP];
+                i=0;
+                for(DataSnapshot ds: dataSnapshot.child("tips").getChildren()){
+                    Tips tip = ds.getValue(Tips.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
+                    tips[i]= tip;
+                    i++;
+                }
+                UpdateTips(tips);
+                //KET THUC TIPS
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -176,7 +184,6 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //tuong tu ben duoi
-        Log.d("daiday", "dayladai");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
@@ -245,6 +252,17 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.bindString(10, q.getCorrectAnswer());
             stmt.bindString(11, q.getImage());
             stmt.bindString(12, q.getNote());
+            stmt.execute();
+        }
+    }
+    public void UpdateTips(Tips[] tips){
+        SQLiteDatabase db = this.getWritableDatabase();
+        for(Tips p : tips){
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO Tips (indexPart, indexTip, titleTip, contentTip) VALUES(?,?,?,?)");
+            stmt.bindString(1, p.getIndexPart());
+            stmt.bindString(2, p.getIndexTip());
+            stmt.bindString(3, p.getTitleTip());
+            stmt.bindString(4, p.getContentTip());
             stmt.execute();
         }
     }
@@ -460,4 +478,62 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return correctAnswers;
     }
+
+    //DUY
+    public List<Tips> layDanhSachTip(String indexPart){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Tips> list = new ArrayList<Tips>();
+        String sql = "select * from Tips where indexPart=" + indexPart;
+        Cursor c = db.rawQuery(sql,null);
+        c.moveToFirst();
+        while (!c.isAfterLast()){ // khong phai cuoi cung
+            Tips item = new Tips();
+            item.setIndexTip(c.getString(0));
+            item.setIndexPart(c.getString(1));
+            item.setTitleTip(c.getString(3));
+            item.setContentTip(c.getString(2));
+            list.add(item);
+            c.moveToNext();
+        }
+        return list;
+    }
+    public List<Tips> layContentTip(String indexTip){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Tips> list = new ArrayList<Tips>();
+        String sql = "select * from Tips where indexTip=" +indexTip;
+        Cursor c = db.rawQuery(sql,null);
+        c.moveToFirst();
+        while (!c.isAfterLast()){ // khong phai cuoi cung
+            Tips item = new Tips();
+            item.setIndexTip(c.getString(0));
+            item.setIndexPart(c.getString(1));
+            item.setContentTip(c.getString(2));
+            item.setTitleTip(c.getString(3));
+            list.add(item);
+            c.moveToNext();
+        }
+        return list;
+    }
+    public Cursor getTipsList(String indexPart){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "select * from Tips where indexPart=" + indexPart;
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        //lay từ trên xuống
+        return cursor;
+    }
+
+    public Tips fetchTipByID(String indexTip){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "select * from Tips where indexTip=" + indexTip;
+        Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToFirst();
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        return new Tips(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
+    }
+    //KET THUC CUA DUY
 }

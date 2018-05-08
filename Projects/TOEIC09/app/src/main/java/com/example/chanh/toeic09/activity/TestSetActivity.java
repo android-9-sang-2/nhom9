@@ -1,4 +1,4 @@
-package com.example.chanh.toeic09;
+package com.example.chanh.toeic09.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
 import com.example.chanh.toeic09.model.TestSet;
-import com.example.chanh.toeic09.model.TestSetAdapter;
+import com.example.chanh.toeic09.adapter.TestSetAdapter;
 
 import java.io.Serializable;
 

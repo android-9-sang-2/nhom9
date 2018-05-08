@@ -1,4 +1,4 @@
-package com.example.chanh.toeic09.model;
+package com.example.chanh.toeic09.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
+import com.example.chanh.toeic09.model.Part;
+import com.example.chanh.toeic09.model.TestSet;
 
 import java.io.File;
 
