@@ -1,13 +1,11 @@
 package com.example.chanh.toeic09;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
-import com.google.firebase.FirebaseApp;
+import com.example.chanh.toeic09.adapter.VocabularyAdapter;
+import com.example.chanh.toeic09.model.Vocabulary;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,21 +35,22 @@ public class VocabularyActivity extends AppCompatActivity {
                     Vocabulary vo = ds.getValue(Vocabulary.class);
                     arrVoc.add(vo);
                 }
-                adapter = new VocabularyAdapter(getApplicationContext(), 0, arrVoc);
+                adapter = new VocabularyAdapter(getParent(), 0, arrVoc);
                 listView.setAdapter(adapter);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 //        getData();
 
-//        adapter = new VocabularyAdapter(this, 0, arrVoc);
-//        listView.setAdapter(adapter);
+
     }
-    public void getData(){
-        DataVocabulary.getData().arrVoc = new ArrayList<>();
-    }
+//    public void getData(){
+//        DataVocabulary.getData().arrVoc = new ArrayList<>();
+//    }
 }
