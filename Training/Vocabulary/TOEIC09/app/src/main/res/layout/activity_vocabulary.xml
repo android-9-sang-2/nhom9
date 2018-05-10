@@ -13,5 +13,7 @@
         android:layout_margin="25dp"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="25dp"
-        tools:ignore="MissingConstraints"></ListView>
+        tools:ignore="MissingConstraints">
+
+    </ListView>
 </android.support.constraint.ConstraintLayout>

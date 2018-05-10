@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 
 public class VocabularyActivity extends AppCompatActivity {
-
     ListView listView;
     VocabularyAdapter adapter;
     DatabaseReference mdata;
