@@ -63,7 +63,7 @@ public class TestSetActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(TestSetActivity.this,HomeActivity.class);
+        Intent intent = new Intent(TestSetActivity.this,MainActivity.class);
         startActivity(intent);
     }
 }
