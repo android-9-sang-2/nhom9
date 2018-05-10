@@ -22,7 +22,7 @@
         <activity android:name=".TestSetActivity" />
         <activity android:name=".QuestionGroupSliderActivity" />
         <activity android:name=".ResultActivity" />
-        <!--<activity android:name=".VocabularyActivity"></activity>-->
+        <!-- <activity android:name=".VocabularyActivity"></activity> -->
     </application>
 
 </manifest>
