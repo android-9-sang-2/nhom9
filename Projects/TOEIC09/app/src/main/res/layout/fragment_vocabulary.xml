@@ -3,12 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HocTuVungFragment">
+    tools:context=".fragment.VocabularyFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/ListViewVocabulary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hoc tu vung" />
+        android:layout_margin="25dp"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="25dp"
+        tools:ignore="MissingConstraints">
+    </ListView>
 
 </FrameLayout>

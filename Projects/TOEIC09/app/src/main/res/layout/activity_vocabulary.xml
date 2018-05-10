@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.VocabularyActivity">
+    tools:context=".VocabularyActivity">
 
-    <ListView
-        android:id="@+id/ListViewVocabulary"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="25dp"
-        tools:ignore="MissingConstraints"></ListView>
+    <!--<ListView-->
+        <!--android:id="@+id/ListViewVocabulary"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_margin="25dp"-->
+        <!--tools:layout_editor_absoluteX="25dp"-->
+        <!--tools:layout_editor_absoluteY="25dp"-->
+        <!--tools:ignore="MissingConstraints">-->
+
+    <!--</ListView>-->
 </android.support.constraint.ConstraintLayout>
