@@ -1,9 +1,10 @@
-package com.example.chanh.toeic09;
+package com.example.chanh.toeic09.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
+import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.adapter.VocabularyAdapter;
 import com.example.chanh.toeic09.model.Vocabulary;
 import com.google.firebase.database.DataSnapshot;

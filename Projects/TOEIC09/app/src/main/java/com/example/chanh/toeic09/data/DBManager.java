@@ -14,6 +14,7 @@ import com.example.chanh.toeic09.model.Question;
 import com.example.chanh.toeic09.model.QuestionGroup;
 import com.example.chanh.toeic09.model.TestSet;
 import com.example.chanh.toeic09.model.Tips;
+import com.example.chanh.toeic09.model.Vocabulary;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,8 +39,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     //-----------
 
-    public static final String DATABASE_NAME ="toeic";
-    private static final String TABLE_NAME ="Parts";
+    public static final String DATABASE_NAME ="toeic81";
 
     private Context context;
     public DBManager(Context context, String name) {
@@ -62,7 +62,6 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(final SQLiteDatabase db) {
         DatabaseReference mData;
-        Log.d("toiday", "a");
         String sqlQuery="";
         //1. Tao bang Parts
         sqlQuery ="CREATE TABLE Part (indexPart TEXT NOT NULL, name TEXT NOT NULL, icon TEXT, PRIMARY KEY(indexPart))";
@@ -78,15 +77,10 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(sqlQuery);
         //Tạo bảng Tip_DUY
         sqlQuery = "CREATE TABLE Tips(indexTip INTEGER NOT NULL, indexPart INTEGER NOT NULL,contentTip TEXT NOT NULL,titleTip TEXT NOT NULL, PRIMARY KEY(indexTip,indexPart))";
-
         db.execSQL(sqlQuery);
-        //lan dau tien cai dat thi ket noi den firebase
-        //-Lay xuong so luong part, danh sach TestList
-//        initIconPart();
-//        UpdatePart(db,parts);
-//        initDB(db);
-        //Nguyendoanh Create Table Score
         sqlQuery = "CREATE TABLE Score (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL, Score TEXT NOT NULL, PRIMARY KEY(indexPart,indexTestSet,Score))";
+        db.execSQL(sqlQuery);
+        sqlQuery = "CREATE TABLE Vocabulary (word TEXT NOT NULL,mean TEXT NOT NULL)";
         db.execSQL(sqlQuery);
         //
         mData = FirebaseDatabase.getInstance().getReference();
@@ -171,6 +165,17 @@ public class DBManager extends SQLiteOpenHelper {
                 }
                 UpdateTips(tips);
                 //KET THUC TIPS
+                //BANG Vocabulary
+                int count_VOCABULARY = (int) dataSnapshot.child("vocabulary").getChildrenCount();
+                Vocabulary[] vocabulary_arr= new Vocabulary[count_VOCABULARY];
+                i=0;
+                for(DataSnapshot ds: dataSnapshot.child("vocabulary").getChildren()){
+                    Vocabulary vocabulary = ds.getValue(Vocabulary.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
+                    vocabulary_arr[i]= vocabulary;
+                    i++;
+                }
+                UpdateVocabulary(vocabulary_arr);
+                //KET THUC Vocabulary
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -184,7 +189,7 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //tuong tu ben duoi
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
@@ -266,6 +271,15 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
+    public void UpdateVocabulary(Vocabulary[] vocabulary_arr){
+        SQLiteDatabase db = this.getWritableDatabase();
+        for(Vocabulary p : vocabulary_arr){
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO Vocabulary (word, mean) VALUES(?,?)");
+            stmt.bindString(1, p.getWord());
+            stmt.bindString(2, p.getMean());
+            stmt.execute();
+        }
+    }
     // Doanh dang o day
     public void InsertScore(String indexPart,String indexTestSet, String currentscore){ // NguyenDoanh
         SQLiteDatabase db = this.getWritableDatabase();
@@ -291,14 +305,30 @@ public class DBManager extends SQLiteOpenHelper {
                 stmt.execute();
             }
         }
-
-
     }
 
-
-
-
-
+    public String getScore(String indexPart,String indexTestSet){ // NguyenDoanh
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCount= db.rawQuery("SELECT count(*),score from Score where indexPart=" + indexPart +" and indexTestSet = " + indexTestSet, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        String score;
+        if(count == 0) {
+            // Thuc hien insert vao bang neu chua co du lieu
+            score = "0";
+        }
+        else {
+            score = mCount.getString(1);
+        }
+        return score;
+    }
+    public String count_question(String indexPart,String indexTestSet){ // NguyenDoanh
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCount= db.rawQuery("SELECT count(*) from Question where indexPart=" + indexPart +" and indexTestSet = " + indexTestSet, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        return String.valueOf(count);
+    }
     //FUNCTION Lay danh sach cac Part --------> HomeActivity
     public Part[] getPartArray(){
         Log.d("getpart", "part");
