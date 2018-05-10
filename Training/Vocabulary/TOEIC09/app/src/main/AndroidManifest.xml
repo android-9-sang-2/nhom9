@@ -19,12 +19,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <!-- <activity android:name=".TestSetActivity" /> -->
         <!-- <activity android:name=".QuestionGroupSliderActivity" /> -->
         <!-- <activity android:name=".ResultActivity" /> -->
         <activity android:name=".VocabularyActivity" />
         <!-- <activity android:name=".Notification"></activity> -->
         <activity android:name=".MeaningActivity"></activity>
+=======
+        <activity android:name=".TestSetActivity" />
+        <activity android:name=".QuestionGroupSliderActivity" />
+        <activity android:name=".ResultActivity" />
+        <!-- <activity android:name=".VocabularyActivity"></activity> -->
+>>>>>>> 58343918482538d3a3fe2e6e78d366bc244352bd
     </application>
 
 </manifest>
