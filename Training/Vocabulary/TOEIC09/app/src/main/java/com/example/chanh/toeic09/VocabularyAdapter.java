@@ -42,6 +42,7 @@ public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
         return row;
     }
 
+
     class ViewHolder{
         TextView word, mean;
 
