@@ -17,9 +17,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class VocabularyActivity extends AppCompatActivity {
+public class DetailsVocabulary extends AppCompatActivity {
+
     ListView listView;
-    VocabularyAdapter adapter;
+    DetailsVocabularyAdapter adapter;
     DatabaseReference mdata;
 
     @Override
@@ -36,7 +37,7 @@ public class VocabularyActivity extends AppCompatActivity {
                     Vocabulary vo = ds.getValue(Vocabulary.class);
                     arrVoc.add(vo);
                 }
-                adapter = new VocabularyAdapter(getApplicationContext(), 0, arrVoc);
+                adapter = new DetailsVocabularyAdapter(getApplicationContext(), 0, arrVoc);
                 listView.setAdapter(adapter);
             }
 
