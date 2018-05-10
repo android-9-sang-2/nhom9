@@ -5,18 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <RadioButton
-        android:id="@+id/choose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+    <!--<CheckBox-->
+        <!--android:id="@+id/choose"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="20dp" />-->
 
     <LinearLayout
+        android:paddingLeft="30dp"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:orientation="vertical"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="20dp" >
 
         <TextView
             android:id="@+id/word"
@@ -29,6 +29,7 @@
             android:layout_marginLeft="10dp" />
 
         <TextView
+            android:textColor="#232222"
             android:id="@+id/mean"
             android:layout_width="match_parent"
             android:layout_height="25dp"

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import com.example.chanh.toeic09.Vocabulary;
 import com.example.chanh.toeic09.model.Part;
 import com.example.chanh.toeic09.model.Question;
 import com.example.chanh.toeic09.model.QuestionGroup;
@@ -101,15 +102,15 @@ public class DBManager extends SQLiteOpenHelper {
                 int count = (int) dataSnapshot.child("part").getChildrenCount();
                 parts = new Part[count];
                 String path_to_icon;
-                int i=0;
+                int i = 0;
                 //BANG PART
-                for(DataSnapshot ds: dataSnapshot.child("part").getChildren()){
+                for (DataSnapshot ds : dataSnapshot.child("part").getChildren()) {
                     Part part = ds.getValue(Part.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
 //                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
-                    path_to_icon = saveFile(part.getIcon(), "part" + String.valueOf(i+1) +".png", "image");  //buoc nay download
+                    path_to_icon = saveFile(part.getIcon(), "part" + String.valueOf(i + 1) + ".png", "image");  //buoc nay download
                     Log.d("pathtot", part.getIcon());
                     part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
-                    parts[i]= part;
+                    parts[i] = part;
 
                     Log.d("thanhtam", part.getName());
                     i++;
@@ -119,22 +120,23 @@ public class DBManager extends SQLiteOpenHelper {
                 //BANG TESTSET
                 int count_testset = (int) dataSnapshot.child("testset").getChildrenCount();
                 TestSet[] testSets = new TestSet[count_testset];
-                i=0;
+                i = 0;
                 String path_to_audio;
-                for(DataSnapshot ds: dataSnapshot.child("testset").getChildren()){
+                for (DataSnapshot ds : dataSnapshot.child("testset").getChildren()) {
                     TestSet testSet = ds.getValue(TestSet.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
 //                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
-                    Log.d("cf",testSet.getAudio() );
-                    if(!testSet.getAudio().toString().equalsIgnoreCase("")){
-                        path_to_audio = saveFile(testSet.getAudio(), "Audio_testSet" + String.valueOf(i+1) +".mp3", "audio");  //buoc nay download
+                    Log.d("cf", testSet.getAudio());
+                    if (!testSet.getAudio().toString().equalsIgnoreCase("")) {
+                        path_to_audio = saveFile(testSet.getAudio(), "Audio_testSet" + String.valueOf(i + 1) + ".mp3", "audio");  //buoc nay download
                         testSet.setAudio(path_to_audio);       //buoc nay set duoc part_name va icon_pathOFFLINE
                     }
-                    testSets[i]= testSet;
+                    testSets[i] = testSet;
                     i++;
                 }
                 UpdateTestSet(testSets);
 
                 ///////HET BANG TESTSET
+
 
                 //BANG QUESTIONGROUP
                 int count_QUESTIONGROUP = (int) dataSnapshot.child("questiongroup").getChildrenCount();
@@ -247,6 +249,23 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.bindString(12, q.getNote());
             stmt.execute();
         }
+    }
+    // NguyenDoanh get Vocabulary
+    public Vocabulary getVocabulary(String word, String mean){
+        String selectQuery = "SELECT  * FROM Vocabulary WHERE word=" + word + " AND mean=" + mean;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        Vocabulary vocabulary = new Vocabulary();
+        if (cursor.moveToFirst()) {
+            do {
+                vocabulary.setWord(cursor.getString(0));
+                vocabulary.setMean(cursor.getString(1));
+//                            vocabulary.setIcon(cursor.getString(2));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return vocabulary;
     }
     // Doanh dang o day
     public void InsertScore(String indexPart,String indexTestSet, String currentscore){ // NguyenDoanh

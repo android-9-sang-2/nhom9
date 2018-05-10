@@ -44,15 +44,11 @@ public class TestSetAdapter  extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         final DBManager dbManager = new DBManager(this.context, "toeic81");
         Part part = dbManager.getPartDetail(testSets[i].getIndexPart());
-        String score = dbManager.getScore(testSets[i].getIndexPart(), testSets[i].getIndexTestSet());
-        String count_question = dbManager.count_question(testSets[i].getIndexPart(), testSets[i].getIndexTestSet());
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(R.layout.activity_test_set_row,null);
         TextView tvTestName =(TextView) view.findViewById(R.id.tvTestSetName);
         ImageView ivTestLogo = (ImageView) view.findViewById(R.id.ivIcon);
-        TextView tvScore =(TextView) view.findViewById(R.id.tvScore);
         tvTestName.setText(part.getName() + " " + testSets[i].getIndexTestSet());
-        tvScore.setText("High score: " + score + "/" + count_question);
         File myImageFile = new File(part.getIcon());
         ivTestLogo.setImageDrawable(Drawable.createFromPath(myImageFile.toString()));
         return view;
