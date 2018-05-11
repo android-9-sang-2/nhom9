@@ -9,12 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import com.example.chanh.toeic09.model.Part;
-import com.example.chanh.toeic09.model.Question;
-import com.example.chanh.toeic09.model.QuestionGroup;
-import com.example.chanh.toeic09.model.TestSet;
-import com.example.chanh.toeic09.model.Tips;
-import com.example.chanh.toeic09.model.Vocabulary;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +18,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.example.chanh.toeic09.model.Part;
+import com.example.chanh.toeic09.model.Question;
+import com.example.chanh.toeic09.model.QuestionGroup;
+import com.example.chanh.toeic09.model.TestSet;
+import com.example.chanh.toeic09.model.Tips;
+import com.example.chanh.toeic09.model.Vocabulary;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -75,7 +75,7 @@ public class DBManager extends SQLiteOpenHelper {
         sqlQuery = "CREATE TABLE Score (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL, Score TEXT NOT NULL, PRIMARY KEY(indexPart,indexTestSet,Score))";
         db.execSQL(sqlQuery);
         //7. Tao bang Vocabulary --Son
-        sqlQuery = "CREATE TABLE Vocabulary (word TEXT NOT NULL, mean TEXT NOT NULL, sentences TEXT, meanSentences TEXT)";
+        sqlQuery = "CREATE TABLE Vocabulary (word TEXT NOT NULL, mean TEXT NOT NULL, sentences TEXT, meanSentences TEXT, flag TEXT)";
         db.execSQL(sqlQuery);
         //LAY DU LIEU TU FIREBASE VE SQLITE
         mData = FirebaseDatabase.getInstance().getReference();
@@ -95,7 +95,6 @@ public class DBManager extends SQLiteOpenHelper {
 
                     part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
                     parts[i]= part;
-
                     i++;
                 }
                 UpdatePart(parts);
@@ -110,7 +109,7 @@ public class DBManager extends SQLiteOpenHelper {
 //                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
                     Log.d("cf",testSet.getAudio() );
                     if(!testSet.getAudio().toString().equalsIgnoreCase("")){
-                        path_to_audio = saveFile(testSet.getAudio(), "Audio_testSet" + String.valueOf(i+1) +".mp3", "audio");  //buoc nay download
+                        path_to_audio = saveFile(testSet.getAudio(), "Audio_testSet" + testSet.getIndexPart() + testSet.getIndexTestSet() +".mp3", "audio");  //buoc nay download
                         testSet.setAudio(path_to_audio);       //buoc nay set duoc part_name va icon_pathOFFLINE
                     }
                     testSets[i]= testSet;
@@ -130,11 +129,20 @@ public class DBManager extends SQLiteOpenHelper {
                 UpdateQuestionGroup(questionGroups);
 
                 //BANG QUESTION --Dai
+
                 int count_QUESTION = (int) dataSnapshot.child("question").getChildrenCount();
+                Log.d("daidai", String.valueOf(count_QUESTION));
                 Question[] questions= new Question[count_QUESTION];
                 i=0;
                 for(DataSnapshot ds: dataSnapshot.child("question").getChildren()){
                     Question question = ds.getValue(Question.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
+                    //luu hinh anh vao bo nho trong
+                    String path="";
+                    if(!question.getImage().toString().equalsIgnoreCase("")){
+                        path = saveFile(question.getImage(), "Image_" + question.getIndexPart()+question.getIndexTestSet()+question.getIndexQuestion()+".png", "image");  //buoc nay download
+                        Log.d("daidai", path);
+                    }
+                    question.setImage(path);
                     questions[i]= question;
                     i++;
                 }
@@ -151,12 +159,13 @@ public class DBManager extends SQLiteOpenHelper {
                 }
                 UpdateTips(tips);
 
-                //BANG Vocabulary --Son
+                //BANG Vocabulary --Son --Doanh
                 int count_VOCABULARY = (int) dataSnapshot.child("vocabulary").getChildrenCount();
                 Vocabulary[] vocabulary_arr= new Vocabulary[count_VOCABULARY];
                 i=0;
                 for(DataSnapshot ds: dataSnapshot.child("vocabulary").getChildren()){
                     Vocabulary vocabulary = ds.getValue(Vocabulary.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
+                    vocabulary.flag = "0";
                     vocabulary_arr[i]= vocabulary;
                     i++;
                 }
@@ -249,11 +258,12 @@ public class DBManager extends SQLiteOpenHelper {
     public void UpdateVocabulary(Vocabulary[] vocabulary_arr){
         SQLiteDatabase db = this.getWritableDatabase();
         for(Vocabulary p : vocabulary_arr){
-            SQLiteStatement stmt = db.compileStatement("INSERT INTO Vocabulary (word, mean, sentences, meanSentences) VALUES(?,?,?,?)");
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO Vocabulary (word, mean, sentences, meanSentences, flag) VALUES(?,?,?,?, ?)");
             stmt.bindString(1, p.getWord());
             stmt.bindString(2, p.getMean());
             stmt.bindString(3, p.getSentences());
             stmt.bindString(4, p.getMeanSentences());
+            stmt.bindString(5, String.valueOf(p.flag));
             stmt.execute();
         }
     }
@@ -350,6 +360,7 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return listPart;
     }
+
      //--Dung : lay chi tiet ve 1 Part nao do
     public Part getPartDetail(String p){
         String selectQuery = "SELECT  * FROM Part WHERE indexPart=" + p;
@@ -495,19 +506,20 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String correct;
-
-        String selectQuery = "SELECT correctAnswer from Question where indexPart=" + indexPart + " AND indexTestSet=" + indexTestSet;
+        String an="";
+        String selectQuery = "SELECT correctAnswer, indexQuestion from Question where indexPart=" + indexPart + " AND indexTestSet=" + indexTestSet + " order by CAST(indexQuestion AS INT)" ;
         Cursor cursor = db.rawQuery(selectQuery, null);
-        int i=0;
         if (cursor.moveToFirst()) {
             do {
                 correct = cursor.getString(0);
                 correctAnswers.add(correct);
-                i++;
+                an = cursor.getString(1);
+                Log.d("vc", an);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
+        Log.d("daivcccccc", correctAnswers.toString());
         return correctAnswers;
     }
 
@@ -584,11 +596,39 @@ public class DBManager extends SQLiteOpenHelper {
                 vocabulary.setMean(cursor.getString(1));
                 vocabulary.setSentences(cursor.getString(2));
                 vocabulary.setMeanSentences(cursor.getString(3));
+                vocabulary.flag = cursor.getString(4);
                 arr.add(vocabulary);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return arr;
+    }
+    public ArrayList<Vocabulary> getVocArrayChecked(){
+        String selectQuery = "SELECT  * FROM Vocabulary where flag='1'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        ArrayList<Vocabulary> arr = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                Vocabulary vocabulary  = new Vocabulary();
+                vocabulary.setWord(cursor.getString(0));
+                vocabulary.setMean(cursor.getString(1));
+                vocabulary.setSentences(cursor.getString(2));
+                vocabulary.setMeanSentences(cursor.getString(3));
+                vocabulary.flag = cursor.getColumnName(4);
+                arr.add(vocabulary);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return arr;
+    }
+    public void UpdateVoc(String word, String flag){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql="UPDATE Vocabulary SET flag='"+flag+"' WHERE word='" + word+"'";
+        Log.d("abc", sql);
+        SQLiteStatement stmt = db.compileStatement(sql);
+        stmt.execute();
     }
 }

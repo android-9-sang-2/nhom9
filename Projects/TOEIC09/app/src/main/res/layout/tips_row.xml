@@ -14,10 +14,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvidTip"
             android:textSize="18sp"
+            android:gravity="center"
             android:text="id"
+            android:background="@drawable/border_num"
             android:textStyle="bold"
-            android:textColor="#990000"
-            android:paddingRight="10sp"/>
+            android:layout_marginRight="15dp"
+            android:textColor="#3b75d4" />
+
 
         <TextView
             android:textStyle="bold"

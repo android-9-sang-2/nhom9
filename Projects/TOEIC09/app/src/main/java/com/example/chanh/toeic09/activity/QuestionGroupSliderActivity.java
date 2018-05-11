@@ -1,5 +1,6 @@
 package com.example.chanh.toeic09.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -14,6 +15,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -61,9 +64,19 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(QuestionGroupSliderActivity.this,TestSetActivity.class);
-        intent.putExtra("indexPart", indexPart);
-        startActivity(intent);
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to quit this test?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(QuestionGroupSliderActivity.this,TestSetActivity.class);
+                        intent.putExtra("indexPart", indexPart);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +117,12 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
 //        db = new SQLDBSource(this);
 //        questionGroupList = db.laydanhSachQuestionGroup(3,1);  // truyen vao 2 gia tri
         // chay thoi gian
-        timer = new DemGio(thoigian,1000);
-        timer.start();
+
+        if(!reviewmode){
+            timer = new DemGio(thoigian,1000);
+            timer.start();
+        }
+
 
         pagerAdapter = new QuestionGroupPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -213,32 +230,30 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
                 mediaPlayer.seekTo(sbMedia.getProgress());
             }
         });
-        tvXemDiem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // xu ly xem diem
-            }
-        });
+
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // xu ly dap an
-                int countCorrectAnswer=0;
-                for(int i=1; i<correctAnswers.size(); i++){
-                    if(selectedAnswers.get(i).equals(correctAnswers.get(i))){
-                        countCorrectAnswer++;
-                    }
+                if(!reviewmode){
+                    new AlertDialog.Builder(QuestionGroupSliderActivity.this)
+                            .setMessage("Do you want to submit?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Done();
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
                 }
-                Intent intent = new Intent(QuestionGroupSliderActivity.this,ResultActivity.class);
-                intent.putExtra("count_correct_answer", countCorrectAnswer);
-                intent.putExtra("count_question", correctAnswers.size()-1);
-                intent.putExtra("testSet", (Serializable) testSet);//truyen 1 object boo de(indexPart, indexTestSet, audio) de cho nut REVIEW
-                intent.putStringArrayListExtra("selectedAnswers", selectedAnswers);
-                startActivity(intent);
-
+                else {
+                    Done();
+                }
 
             }
         });
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -279,7 +294,22 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
             }
         });
     }
-
+    public void Done(){
+        Log.d("DAivccc", selectedAnswers.toString());
+        Log.d("DAivccc", correctAnswers.toString());
+        int countCorrectAnswer=0;
+        for(int i=1; i<correctAnswers.size(); i++){
+            if(selectedAnswers.get(i).equals(correctAnswers.get(i))){
+                countCorrectAnswer++;
+            }
+        }
+        Intent intent = new Intent(QuestionGroupSliderActivity.this,ResultActivity.class);
+        intent.putExtra("count_correct_answer", countCorrectAnswer);
+        intent.putExtra("count_question", correctAnswers.size()-1);
+        intent.putExtra("testSet", (Serializable) testSet);//truyen 1 object boo de(indexPart, indexTestSet, audio) de cho nut REVIEW
+        intent.putStringArrayListExtra("selectedAnswers", selectedAnswers);
+        startActivity(intent);
+    }
     @Override
     protected void onPause() {
         super.onPause();
@@ -320,7 +350,7 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
         });
     }
     private class DemGio extends CountDownTimer {
-        // millisinfurtr 60*1000 coutdown ... thoi gian thuc hien nhay so
+        // millisinfurtr 60*1000coutdown ... thoi gian thuc hien nhay so
         public DemGio(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
@@ -335,7 +365,10 @@ public class QuestionGroupSliderActivity extends FragmentActivity {
 
         @Override
         public void onFinish() {
-            txtTime.setText("00:00"); // khi ket thuc dat gia tri bang 0
+            txtTime.setText("00:00");
+            // khi ket thuc dat gia tri bang 0
+            Done();
+
         }
     }
     private class QuestionGroupPagerAdapter extends FragmentStatePagerAdapter {

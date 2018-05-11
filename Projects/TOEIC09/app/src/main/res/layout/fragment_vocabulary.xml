@@ -6,14 +6,38 @@
     tools:context=".fragment.VocabularyFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/ListViewVocabulary"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="25dp"
-        tools:ignore="MissingConstraints">
-    </ListView>
+        tools:context=".fragment.VocabularyFragment">
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#f73b3b"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Tap the bell to remind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_action_notify"
+                android:id="@+id/imgbtnRemind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/ListViewVocabulary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+        </ListView>
+    </LinearLayout>
 
 </FrameLayout>

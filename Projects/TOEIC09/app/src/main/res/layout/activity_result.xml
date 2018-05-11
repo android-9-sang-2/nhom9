@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chanh.toeic9.ResultActivity">
+    tools:context="com.example.chanh.toeic09.activity.ResultActivity">
     <TextView
         android:paddingTop="20dp"
         android:textStyle="bold"

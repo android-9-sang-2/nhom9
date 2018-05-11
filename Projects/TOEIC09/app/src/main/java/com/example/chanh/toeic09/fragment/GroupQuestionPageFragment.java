@@ -1,5 +1,7 @@
 package com.example.chanh.toeic09.fragment;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import com.example.chanh.toeic09.data.DBManager;
 import com.example.chanh.toeic09.model.Question;
 import com.example.chanh.toeic09.adapter.QuestionAdapter;
 import com.example.chanh.toeic09.model.QuestionGroup;
+
+import java.io.File;
 
 public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
     QuestionGroup questionGroups[];
@@ -80,6 +84,10 @@ public class GroupQuestionPageFragment extends android.support.v4.app.Fragment{
             tvContent.setText(getItem(pageNumber).getContent());
         }
         if(getItem(pageNumber).getIndexPart().equals("1")){
+            //hien thi hinh tu bo nho trong
+//            int indexQ=Integer.valueOf(getItem(pageNumber).getIndexQuestionGroup())-1;
+            File myImageFile = new File(questions[0].getImage());
+            imgP1.setImageDrawable(Drawable.createFromPath(myImageFile.toString()));
             imgP1.setVisibility(View.VISIBLE);
         }
 //        parts = dbManager.getPartArray();

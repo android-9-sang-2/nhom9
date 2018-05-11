@@ -1,11 +1,15 @@
 package com.example.chanh.toeic09.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -16,6 +20,8 @@ import com.example.chanh.toeic09.fragment.VocabularyFragment;
 import com.example.chanh.toeic09.fragment.HomeFragment;
 import com.example.chanh.toeic09.fragment.TipsFragment;
 import com.example.chanh.toeic09.fragment.WelcomeFragment;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,24 +42,33 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        final DBManager dbManager = new DBManager(this, "toeic81");
-        SQLiteDatabase db = dbManager.getWritableDatabase();
-
-        WelcomeFragment welcomeFragment = new WelcomeFragment();
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.content_main,welcomeFragment,welcomeFragment.getTag()).commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if(!DatabaseExist(this,"toeic81")){
+            final DBManager dbManager = new DBManager(this, "toeic81");
+            SQLiteDatabase db = dbManager.getWritableDatabase();
+            WelcomeFragment welcomeFragment = new WelcomeFragment();
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_main,welcomeFragment,welcomeFragment.getTag()).commit();
         }
+        else{
+            HomeFragment homeFragment = new HomeFragment();
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_main,homeFragment,homeFragment.getTag()).commit();
+        }
+
     }
+    private static boolean DatabaseExist(Context context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
+    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,5 +117,21 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @Override
+    public void onBackPressed()
+    {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+//        Intent intent = new Intent(TestSetActivity.this,MainActivity.class);
+//        startActivity(intent);
     }
 }
