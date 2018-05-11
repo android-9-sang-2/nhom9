@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".fragment.VocabularyFragment">
     <!--<LinearLayout-->
         <!--android:layout_marginTop="20dp"-->
@@ -35,3 +36,16 @@
 
     <!--</ListView>-->
 </LinearLayout>
+=======
+    tools:context=".VocabularyActivity">
+
+    <ListView
+        android:id="@+id/ListViewVocabulary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="25dp"
+        tools:ignore="MissingConstraints"></ListView>
+</android.support.constraint.ConstraintLayout>
+>>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe

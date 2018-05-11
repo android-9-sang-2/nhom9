@@ -22,7 +22,7 @@ import java.util.List;
  * Created by nguyendoanh on 5/3/2018.
  */
 
-public class ResultActivity extends AppCompatActivity {
+public class    ResultActivity extends AppCompatActivity {
     PieChart pieChart;
     String indexPart, indexTestSet;
     ArrayList<String> selectedAnswers;

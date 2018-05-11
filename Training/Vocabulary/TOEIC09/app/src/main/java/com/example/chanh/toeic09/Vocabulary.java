@@ -1,6 +1,8 @@
 package com.example.chanh.toeic09;
 
-public class Vocabulary {
+import java.io.Serializable;
+
+public class Vocabulary  implements Serializable{
     private String word;
     private String mean;
     private String sentences;
