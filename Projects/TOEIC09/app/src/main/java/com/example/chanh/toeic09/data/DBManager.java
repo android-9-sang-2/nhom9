@@ -9,14 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-<<<<<<< HEAD
-=======
-import com.example.chanh.toeic09.model.Part;
-import com.example.chanh.toeic09.model.Question;
-import com.example.chanh.toeic09.model.QuestionGroup;
-import com.example.chanh.toeic09.model.TestSet;
-import com.example.chanh.toeic09.model.Tips;
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,16 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper {
-    DatabaseReference mData;
-//    Part[] parts = new Part[7];
-    //firebase
 
-//    ArrayList<Part> parts = new ArrayList<Part>();
-
-    //-----------
-
-    public static final String DATABASE_NAME ="toeic";
-    private static final String TABLE_NAME ="Parts";
+    public static final String DATABASE_NAME ="toeic81";
 
     private Context context;
     public DBManager(Context context, String name) {
@@ -71,42 +55,31 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(final SQLiteDatabase db) {
         DatabaseReference mData;
-        Log.d("toiday", "a");
         String sqlQuery="";
-        //1. Tao bang Parts
+        //1. Tao bang Parts  --Hanh
         sqlQuery ="CREATE TABLE Part (indexPart TEXT NOT NULL, name TEXT NOT NULL, icon TEXT, PRIMARY KEY(indexPart))";
         db.execSQL(sqlQuery);
-        //  2. Tao bang TestSet
+        //  2. Tao bang TestSet  --Dung
         sqlQuery = "CREATE TABLE TestSet(indexPart TEXT NOT NULL, indexTestSet TEXT NOT NULL, audio TEXT ,PRIMARY KEY(indexTestSet,indexPart),FOREIGN KEY(indexPart) REFERENCES Part(indexPart))";
         db.execSQL(sqlQuery);
-        //3. Tao bang QuestionGroup
+        //3. Tao bang QuestionGroup   --Duong
         sqlQuery = "CREATE TABLE QuestionGroup (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL,indexQuestionGroup TEXT NOT NULL,content TEXT,PRIMARY KEY(indexQuestionGroup,indexTestSet,indexPart))";
         db.execSQL(sqlQuery);
-        //4. Tao bang Question
+        //4. Tao bang Question    --Dai
         sqlQuery = "CREATE TABLE Question (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL,indexQuestionGroup TEXT NOT NULL,indexQuestion TEXT NOT NULL,contentQuestion TEXT,answerA TEXT NOT NULL,answerB TEXT NOT NULL,answerC TEXT NOT NULL,answerD TEXT,correctAnswer TEXT NOT NULL,image TEXT,note TEXT,PRIMARY KEY(indexPart,indexTestSet,indexQuestionGroup,indexQuestion))";
         db.execSQL(sqlQuery);
-        //Tạo bảng Tip_DUY
+        //5. Tạo bảng Tip   --Duy
         sqlQuery = "CREATE TABLE Tips(indexTip INTEGER NOT NULL, indexPart INTEGER NOT NULL,contentTip TEXT NOT NULL,titleTip TEXT NOT NULL, PRIMARY KEY(indexTip,indexPart))";
-
         db.execSQL(sqlQuery);
-        //lan dau tien cai dat thi ket noi den firebase
-        //-Lay xuong so luong part, danh sach TestList
-//        initIconPart();
-//        UpdatePart(db,parts);
-//        initDB(db);
-        //Nguyendoanh Create Table Score
+        //6. Tao bang Score --Doanh
         sqlQuery = "CREATE TABLE Score (indexPart TEXT NOT NULL,indexTestSet TEXT NOT NULL, Score TEXT NOT NULL, PRIMARY KEY(indexPart,indexTestSet,Score))";
         db.execSQL(sqlQuery);
-<<<<<<< HEAD
         //7. Tao bang Vocabulary --Son
         sqlQuery = "CREATE TABLE Vocabulary (word TEXT NOT NULL, mean TEXT NOT NULL, sentences TEXT, meanSentences TEXT, flag TEXT)";
         db.execSQL(sqlQuery);
         //LAY DU LIEU TU FIREBASE VE SQLITE
-=======
-        //
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
         mData = FirebaseDatabase.getInstance().getReference();
-        Log.d("lan", "nay");
+
         mData.addValueEventListener(new ValueEventListener() {
             Part[] parts;
             @Override
@@ -115,10 +88,9 @@ public class DBManager extends SQLiteOpenHelper {
                 parts = new Part[count];
                 String path_to_icon;
                 int i=0;
-                //BANG PART
+                //BANG PART --Hanh
                 for(DataSnapshot ds: dataSnapshot.child("part").getChildren()){
-                    Part part = ds.getValue(Part.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
-//                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
+                    Part part = ds.getValue(Part.class);
                     path_to_icon = saveFile(part.getIcon(), "part" + String.valueOf(i+1) +".png", "image");  //buoc nay download
 
                     part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
@@ -127,7 +99,7 @@ public class DBManager extends SQLiteOpenHelper {
                 }
                 UpdatePart(parts);
 
-                //BANG TESTSET
+                //BANG TESTSET --Dung
                 int count_testset = (int) dataSnapshot.child("testset").getChildrenCount();
                 TestSet[] testSets = new TestSet[count_testset];
                 i=0;
@@ -145,30 +117,19 @@ public class DBManager extends SQLiteOpenHelper {
                 }
                 UpdateTestSet(testSets);
 
-                ///////HET BANG TESTSET
-
-                //BANG QUESTIONGROUP
+                //BANG QUESTIONGROUP --Duong
                 int count_QUESTIONGROUP = (int) dataSnapshot.child("questiongroup").getChildrenCount();
                 QuestionGroup[] questionGroups = new QuestionGroup[count_QUESTIONGROUP];
                 i=0;
                 for(DataSnapshot ds: dataSnapshot.child("questiongroup").getChildren()){
-                    QuestionGroup questionGroup = ds.getValue(QuestionGroup.class); //buoc nay set duoc part_name va icon_pathONLINE de download thoi
-//                    part.setId(Integer.valueOf(ds.getKey())); //buoc nay set duoc ID
-//                    path_to_icon = saveImage(part.getIcon(), "part" + String.valueOf(i+1) +".png");  //buoc nay download
-//                    part.setIcon(path_to_icon);       //buoc nay set duoc part_name va icon_pathOFFLINE
+                    QuestionGroup questionGroup = ds.getValue(QuestionGroup.class);
                     questionGroups[i]= questionGroup;
                     i++;
                 }
                 UpdateQuestionGroup(questionGroups);
 
-<<<<<<< HEAD
                 //BANG QUESTION --Dai
 
-=======
-                //HET BANG QUESTIONGROUP
-
-                //BANG QUESTION
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
                 int count_QUESTION = (int) dataSnapshot.child("question").getChildrenCount();
                 Log.d("daidai", String.valueOf(count_QUESTION));
                 Question[] questions= new Question[count_QUESTION];
@@ -186,9 +147,8 @@ public class DBManager extends SQLiteOpenHelper {
                     i++;
                 }
                 UpdateQuestion(questions);
-                //HET BANG QUESTION
 
-                //BANG TIPS
+                //BANG TIPS  --Duy
                 int count_TIP = (int) dataSnapshot.child("tips").getChildrenCount();
                 Tips[] tips= new Tips[count_TIP];
                 i=0;
@@ -198,7 +158,6 @@ public class DBManager extends SQLiteOpenHelper {
                     i++;
                 }
                 UpdateTips(tips);
-<<<<<<< HEAD
 
                 //BANG Vocabulary --Son --Doanh
                 int count_VOCABULARY = (int) dataSnapshot.child("vocabulary").getChildrenCount();
@@ -211,9 +170,6 @@ public class DBManager extends SQLiteOpenHelper {
                     i++;
                 }
                 UpdateVocabulary(vocabulary_arr);
-=======
-                //KET THUC TIPS
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -227,27 +183,12 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //tuong tu ben duoi
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    public String saveFile(String path, String name, String fileType){ //save image from firebase to internal storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl(path);
-        ContextWrapper cw = new ContextWrapper(context);
-        File directory = cw.getDir(fileType, Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath = new File(directory,name);
-        String path_to_icon = mypath.getAbsolutePath();
-        FileOutputStream fos = null;
-        storageRef.getFile(mypath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                Log.d("dai", taskSnapshot.toString());
-            }
-        });
-        return path_to_icon;
-    }
+    //Cac ham UPDATE
+    // --Hanh
     public void UpdatePart(Part[] parts){
         SQLiteDatabase db = this.getWritableDatabase();
         for(Part p : parts){
@@ -258,6 +199,7 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
+    // --Dung
     public void UpdateTestSet(TestSet[]testSets){
         SQLiteDatabase db = this.getWritableDatabase();
         for(TestSet ts : testSets){
@@ -268,6 +210,7 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
+    // --Duong
     public void UpdateQuestionGroup(QuestionGroup[] questionGroups){
         SQLiteDatabase db = this.getWritableDatabase();
         for(QuestionGroup qg : questionGroups){
@@ -279,6 +222,7 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
+    // --Dai
     public void UpdateQuestion(Question[] questions){
         SQLiteDatabase db = this.getWritableDatabase();
         for(Question q : questions){
@@ -298,6 +242,7 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
+    // --Duy
     public void UpdateTips(Tips[] tips){
         SQLiteDatabase db = this.getWritableDatabase();
         for(Tips p : tips){
@@ -309,7 +254,6 @@ public class DBManager extends SQLiteOpenHelper {
             stmt.execute();
         }
     }
-<<<<<<< HEAD
     // --Son
     public void UpdateVocabulary(Vocabulary[] vocabulary_arr){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -344,9 +288,6 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     // --Doanh Luu ket qua kiem tra
-=======
-    // Doanh dang o day
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
     public void InsertScore(String indexPart,String indexTestSet, String currentscore){ // NguyenDoanh
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor mCount= db.rawQuery("SELECT count(*),score from Score where indexPart=" + indexPart +" and indexTestSet = " + indexTestSet + " ", null);
@@ -371,15 +312,33 @@ public class DBManager extends SQLiteOpenHelper {
                 stmt.execute();
             }
         }
-
-
     }
 
+    // --Dung: Lay diem de hien len High Score
+    public String getScore(String indexPart,String indexTestSet){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCount= db.rawQuery("SELECT count(*),score from Score where indexPart=" + indexPart +" and indexTestSet = " + indexTestSet, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        String score;
+        if(count == 0) {
+            score = "0";
+        }
+        else {
+            score = mCount.getString(1);
+        }
+        return score;
+    }
+    // --Dung : dem so luong cau hoi de hien len cung High score
+    public String count_question(String indexPart,String indexTestSet){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor mCount= db.rawQuery("SELECT count(*) from Question where indexPart=" + indexPart +" and indexTestSet = " + indexTestSet, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        return String.valueOf(count);
+    }
 
-
-
-
-    //FUNCTION Lay danh sach cac Part --------> HomeActivity
+    // --Hanh : FUNCTION Lay danh sach cac Part --------> FragmentHome
     public Part[] getPartArray(){
         Log.d("getpart", "part");
         Part listPart[] = new Part[7];
@@ -401,11 +360,8 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return listPart;
     }
-<<<<<<< HEAD
 
      //--Dung : lay chi tiet ve 1 Part nao do
-=======
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
     public Part getPartDetail(String p){
         String selectQuery = "SELECT  * FROM Part WHERE indexPart=" + p;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -422,10 +378,9 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return part;
     }
+    // --Dung: lay 1 mang cac TestSet de dua vao listview
     public TestSet[] getTestSetArray(String part){
         SQLiteDatabase db = this.getWritableDatabase();
-//        testSets = new ArrayList<TestSet>();
-        //dem so luong testset theo part
         Cursor mCount= db.rawQuery("SELECT count(*) from TestSet where indexPart=" + part, null);
         mCount.moveToFirst();
         int count= mCount.getInt(0);
@@ -449,6 +404,8 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return testSets;
     }
+
+    //chua sd
     public TestSet getTestSetDetail(String indexPart, String indexTestSet){
         String selectQuery = "SELECT  * FROM TestSet WHERE indexPart=" + indexPart + " AND indexTestSet="+ indexTestSet;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -465,6 +422,7 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return testSet;
     }
+    //countQuestion tra ve int, ham nay tuong tu count_question --Duong Slider
     public int countQuestion(String indexPart, String indexTestSet ){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor mCount= db.rawQuery("SELECT count(*) from Question where indexPart=" + indexPart + " AND indexTestSet="+indexTestSet, null);
@@ -474,6 +432,8 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return count;
     }
+
+    // --Duong
     public QuestionGroup[] getQuestionGroupArray(String indexPart, String indexTestSet){
         SQLiteDatabase db = this.getWritableDatabase();
 //        testSets = new ArrayList<TestSet>();
@@ -494,9 +454,6 @@ public class DBManager extends SQLiteOpenHelper {
                         cursor.getString(2),
                         cursor.getString(3)
                 );
-//                testSet.setIndexPart(cursor.getString(0));
-//                testSet.setIndexTestSet(cursor.getString(1));
-//                testSet.setAudio(cursor.getString(2));
                 questionGroups[i] = questiongroup;
                 i++;
             } while (cursor.moveToNext());
@@ -506,15 +463,14 @@ public class DBManager extends SQLiteOpenHelper {
         return questionGroups;
     }
 
+    // --Dai
     public Question[] getQuestionArray(String indexPart, String indexTestSet, String indexQuestionGroup){
         SQLiteDatabase db = this.getWritableDatabase();
-//        testSets = new ArrayList<TestSet>();
         //dem so luong testset theo part
         Cursor mCount= db.rawQuery("SELECT count(*) from Question where indexPart=" + indexPart + " AND indexTestSet=" + indexTestSet + " AND indexQuestionGroup=" + indexQuestionGroup, null);
         mCount.moveToFirst();
         int count= mCount.getInt(0);
         mCount.close();
-//        Log.d("VCC", String.valueOf(count));
         Question questions[] = new Question[count];
         String selectQuery = "SELECT * from Question where indexPart=" + indexPart + " AND indexTestSet=" + indexTestSet + " AND indexQuestionGroup=" + indexQuestionGroup;
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -542,6 +498,8 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return questions;
     }
+
+    // --Dai : lay ra mang cac cau tra loi dung
     public ArrayList<String> getCorrectAnswers(String indexPart, String indexTestSet){
         ArrayList<String> correctAnswers = new ArrayList<>();
         correctAnswers.add(""); //ko lay gia tri tai index 0
@@ -565,7 +523,7 @@ public class DBManager extends SQLiteOpenHelper {
         return correctAnswers;
     }
 
-    //DUY
+    // --Duy
     public List<Tips> layDanhSachTip(String indexPart){
         SQLiteDatabase db = this.getWritableDatabase();
         List<Tips> list = new ArrayList<Tips>();
@@ -583,6 +541,7 @@ public class DBManager extends SQLiteOpenHelper {
         }
         return list;
     }
+    // --Duy
     public List<Tips> layContentTip(String indexTip){
         SQLiteDatabase db = this.getWritableDatabase();
         List<Tips> list = new ArrayList<Tips>();
@@ -600,6 +559,7 @@ public class DBManager extends SQLiteOpenHelper {
         }
         return list;
     }
+    //--Duy
     public Cursor getTipsList(String indexPart){
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "select * from Tips where indexPart=" + indexPart;
@@ -611,6 +571,7 @@ public class DBManager extends SQLiteOpenHelper {
         return cursor;
     }
 
+    // --Duy
     public Tips fetchTipByID(String indexTip){
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "select * from Tips where indexTip=" + indexTip;
@@ -622,7 +583,6 @@ public class DBManager extends SQLiteOpenHelper {
         return new Tips(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
     }
     //KET THUC CUA DUY
-<<<<<<< HEAD
     //--Son
     public ArrayList<Vocabulary> getVocArray(){
         String selectQuery = "SELECT  * FROM Vocabulary";
@@ -671,6 +631,4 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteStatement stmt = db.compileStatement(sql);
         stmt.execute();
     }
-=======
->>>>>>> 9a861bdf38de28217f043eeed5be64494678b5fe
 }

@@ -3,6 +3,8 @@ package com.example.chanh.toeic09.activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,6 +21,7 @@ import android.widget.GridView;
 import com.example.chanh.toeic09.R;
 import com.example.chanh.toeic09.data.DBManager;
 import com.example.chanh.toeic09.adapter.GridViewAdapter;
+import com.example.chanh.toeic09.fragment.HomeFragment;
 import com.example.chanh.toeic09.model.Part;
 import com.google.firebase.database.DatabaseReference;
 
@@ -114,15 +117,20 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Fragment fragment=null;
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            fragment = new HomeFragment();
         } else if (id == R.id.nav_tip) {
             Intent intent = new Intent(HomeActivity.this, TipsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_vocabulary) {
 
+        }
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame1, fragment);
+            ft.commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
